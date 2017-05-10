@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <ContentControl Grid.Row="0" Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=CurrentPage}"/>
         
-        <Grid Grid.Row="1" Margin="0,5,0,20">
+        <Grid Grid.Row="1" Margin="0,5,0,20" x:Name="ToolBarGrid" Visibility="Collapsed">
             <controls:ToolBar/>
         </Grid>
     </Grid>

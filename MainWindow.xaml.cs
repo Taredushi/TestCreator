@@ -37,6 +37,7 @@ namespace TestCreator
                     this.ResizeMode = ResizeMode.CanResize;
                     this.Width = 1024;
                     this.Height = 768;
+                    ToolBarGrid.Visibility = Visibility.Visible;
                 }
                 OnPropertyChanged();
             }
@@ -47,7 +48,7 @@ namespace TestCreator
         {
             InitializeComponent();
             this.ResizeMode = ResizeMode.CanMinimize;
-            //_currentPage = new LoginPage();
+            //CurrentPage = new LoginPage();
             CurrentPage = new TestsPage();
         }
 
