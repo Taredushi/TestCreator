@@ -27,7 +27,9 @@
                     </Grid>
                 </Border>
                 <Border Grid.Row="2" Background="#FF338D8D" BorderThickness="2" CornerRadius="2">
-                    <Grid></Grid>
+                    <Grid>
+                        
+                    </Grid>
                 </Border>
             </Grid>
         </Border>
