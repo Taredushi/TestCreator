@@ -20,9 +20,9 @@ using TestCreator.SubPages;
 namespace TestCreator
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainPage : IPage, INotifyPropertyChanged
     {
         private IPage _currentPage;
 
@@ -32,33 +32,22 @@ namespace TestCreator
             set
             {
                 _currentPage = value;
-                if (!(_currentPage is LoginPage))
-                {
-                    this.ResizeMode = ResizeMode.CanResize;
-                    this.Width = 1024;
-                    this.Height = 768;
-                }
                 OnPropertyChanged();
             }
         }
 
-
-        public MainWindow()
+        public MainPage()
         {
             InitializeComponent();
-            this.ResizeMode = ResizeMode.CanMinimize;
-            //_currentPage = new LoginPage();
             CurrentPage = new TestsPage();
         }
 
 
-        #region Events
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
     }
 }

@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="TestCreator.MainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestCreator"
+             mc:Ignorable="d">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <ContentControl Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=CurrentPage}"></ContentControl>
+        </Grid>
+        <Grid DockPanel.Dock="Bottom">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button x:Name="UsersButton">
+                    <Image Source=".\Resources\group.png" Height="24" Width="24"/>
+                </Button>
+                <Button x:Name="ImportButton">
+                    <Image/>
+                </Button>
+                <Button x:Name="ExportButton">
+                    <Image/>
+                </Button>
+                <Button x:Name="PrintButton">
+                    <Image/>
+                </Button>
+                <Button x:Name="RaportsButton">
+                    <Image/>
+                </Button>
+                <Button x:Name="SettingsButton">
+                    <Image/>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</UserControl>

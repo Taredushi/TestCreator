@@ -4,9 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestCreator"
+        xmlns:controls="clr-namespace:TestCreator.Controls"
         mc:Ignorable="d"
         Title="Test creator" Height="450" Width="550">
     <Grid>
-        <ContentControl Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=CurrentPage}"></ContentControl>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFBFEBF1" Offset="0"/>
+                <GradientStop Color="#FFB1BFC1" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ContentControl Grid.Row="0" Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=CurrentPage}"/>
+        
+        <Grid Grid.Row="1" Margin="0,5,0,20">
+            <controls:ToolBar/>
+        </Grid>
     </Grid>
 </Window>

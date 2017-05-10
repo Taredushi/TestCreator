@@ -14,51 +14,63 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TestCreator.Interfaces;
-using TestCreator.SubPages;
 
-namespace TestCreator
+namespace TestCreator.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SearchField.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SearchField
     {
-        private IPage _currentPage;
+        private string _searchText;
+        private Brush _foreColor;
+        private int _fSize;
 
-        public IPage CurrentPage
+        public Brush ForeColor
         {
-            get { return _currentPage; }
+            get { return _foreColor; }
             set
             {
-                _currentPage = value;
-                if (!(_currentPage is LoginPage))
-                {
-                    this.ResizeMode = ResizeMode.CanResize;
-                    this.Width = 1024;
-                    this.Height = 768;
-                }
+                _foreColor = value;
                 OnPropertyChanged();
             }
         }
 
+        public int FSize
+        {
+            get { return _fSize; }
+            set
+            {
+                _fSize = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public MainWindow()
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public SearchField()
         {
             InitializeComponent();
-            this.ResizeMode = ResizeMode.CanMinimize;
-            //_currentPage = new LoginPage();
-            CurrentPage = new TestsPage();
+            ForeColor = Brushes.DimGray;
+            FSize = 14;
+            SearchText = "wyszukaj";
+            DataContext = this;
         }
 
 
-        #region Events
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
     }
 }

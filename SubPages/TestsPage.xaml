@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="TestCreator.SubPages.TestsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestCreator.SubPages"
+             xmlns:controls="clr-namespace:TestCreator.Controls"
+             mc:Ignorable="d">
+    <Grid>
+        <Border CornerRadius="5" Margin="20" BorderThickness="1" Background="#FF302929">
+            <Grid Background="#FF302929" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="TitleTextBlock" Padding="15,20,15,5" Grid.Row="0" Text="Testy" FontSize="30" FontFamily="Cooper Black" Foreground="WhiteSmoke"/>
+                <Border Grid.Row="1" Background="#FF25677A" BorderThickness="2" CornerRadius="2">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Wyszukaj" Grid.Column="0" FontSize="15" Foreground="WhiteSmoke" Margin="15,5" VerticalAlignment="Center"/>
+                        <controls:SearchField x:Name="SearchField" Grid.Column="1" FSize="14" ForeColor="DimGray" Margin="5"/>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2" Background="#FF338D8D" BorderThickness="2" CornerRadius="2">
+                    <Grid></Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+
+</UserControl>
