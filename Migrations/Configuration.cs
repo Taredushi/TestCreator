@@ -1,3 +1,7 @@
+using System.Security.Policy;
+using TestCreator.Database;
+using TestCreator.Enumerators;
+
 namespace TestCreator.Migrations
 {
     using System;
@@ -26,6 +30,31 @@ namespace TestCreator.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            var admin = new User()
+            {
+                Email = "admin@gmail.com",
+                Login = "admin",
+                Name = "Admin",
+                Password = Encryptor.MD5Hash("admin"),
+                Role = (int) Enums.Role.Admin,
+                Surname = "Root",
+                UserID = 1
+            };
+
+            var user = new User()
+            {
+                Email = "user@gmail.com",
+                Login = "user",
+                Name = "User",
+                Password = Encryptor.MD5Hash("user"),
+                Role = (int)Enums.Role.User,
+                Surname = "Normal",
+                UserID = 2
+            };
+
+            context.Users.AddOrUpdate(admin);
+            context.Users.AddOrUpdate(user);
         }
     }
 }

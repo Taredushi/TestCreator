@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TestCreator.SubPages"
              xmlns:controls="clr-namespace:TestCreator.Controls"
              mc:Ignorable="d">
-    <Grid>
+    <Grid Visibility="Visible">
         <Border CornerRadius="5" Margin="20" BorderThickness="1" Background="#FF302929">
             <Grid Background="#FF302929" Margin="5">
                 <Grid.RowDefinitions>

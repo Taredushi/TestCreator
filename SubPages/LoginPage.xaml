@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestCreator"
-             mc:Ignorable="d" MinHeight="400" MinWidth="500">
+             mc:Ignorable="d" MinHeight="400" MinWidth="500" KeyUp="LoginPage_OnKeyUp">
 
     <Grid Background="#FF8ACDCD">
         <Border Margin="40" BorderThickness="2">
@@ -26,20 +26,22 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="15*"/>
                         </Grid.RowDefinitions>
                         <TextBlock Background="#404040" Padding="20,10" Text="Logowanie" Foreground="WhiteSmoke" FontSize="20" FontFamily="Cooper Black" 
                                    Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold"/>
-                        <TextBox x:Name="LoginTb" Grid.Row="1" Grid.Column="1" Margin="20,40,20,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
-                                 Text="username" FontSize="20" Foreground="LightGray"/>
-                        <TextBox x:Name="PasswordTb" Grid.Row="2" Grid.Column="1" Margin="20,10,20,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
-                                 Text="password" FontSize="20" Foreground="LightGray"/>
-                        <Button x:Name="RememberButton" Grid.Column="1" Grid.Row="3" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                        <TextBlock x:Name="ErrorTb" Grid.Row="1" Grid.Column="1" Margin="20,10,20,10" FontSize="20" Foreground="DarkRed" Visibility="Hidden" TextWrapping="WrapWithOverflow"/>
+                        <TextBox x:Name="LoginTb" Grid.Row="2" Grid.Column="1" Margin="20,10,20,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                                 FontSize="20" Foreground="{Binding LoginForeColor}" GotFocus="LoginTb_OnGotFocus" LostFocus="LoginTb_OnLostFocus"/>
+                        <TextBox x:Name="PasswordTb" Grid.Row="3" Grid.Column="1" Margin="20,10,20,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                                 FontSize="20" Foreground="{Binding PasswordForeColor}" GotFocus="PasswordTb_OnGotFocus" LostFocus="PasswordTb_OnLostFocus"/>
+                        <Button x:Name="RememberButton" Grid.Column="1" Grid.Row="4" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                                 HorizontalAlignment="Right" Margin="20,10,20,10" >
                             <TextBlock TextDecorations="Underline" Text="przypomnij szczegóły" FontFamily="Poor Richard" Foreground="LightSlateGray" FontSize="16"/>
                         </Button>
-                        <Button x:Name="LoginButton" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Content="Zaloguj" Background="#FF515151" Margin="20,5,20,5" 
-                                BorderThickness="0" Foreground="WhiteSmoke" Height="35" FontSize="12"/>
+                        <Button x:Name="LoginButton" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Content="Zaloguj" Background="#FF515151" Margin="20,5,20,5" 
+                                BorderThickness="0" Foreground="WhiteSmoke" Height="35" FontSize="12" Click="LoginButton_OnClick"/>
                     </Grid>
                 </Border>
             </Grid>

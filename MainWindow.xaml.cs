@@ -14,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TestCreator.Interfaces;
 using TestCreator.SubPages;
 
 namespace TestCreator
@@ -24,32 +23,30 @@ namespace TestCreator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IPage _currentPage;
-
-        public IPage CurrentPage
-        {
-            get { return _currentPage; }
-            set
-            {
-                _currentPage = value;
-                if (!(_currentPage is LoginPage))
-                {
-                    this.ResizeMode = ResizeMode.CanResize;
-                    this.Width = 1024;
-                    this.Height = 768;
-                    ToolBarGrid.Visibility = Visibility.Visible;
-                }
-                OnPropertyChanged();
-            }
-        }
 
 
         public MainWindow()
         {
             InitializeComponent();
             this.ResizeMode = ResizeMode.CanMinimize;
-            //CurrentPage = new LoginPage();
-            CurrentPage = new TestsPage();
+            var login = new LoginPage();
+            login.PropertyChanged += CurrentPageOnPropertyChanged;
+            ContentCtrl.Content = login;
+        }
+
+        private void CurrentPageOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals("UserLogin"))
+            {
+                this.ResizeMode = ResizeMode.CanResize;
+                this.Width = 1024;
+                this.Height = 768;
+                ToolBarGrid.Visibility = Visibility.Visible;
+                var loggedUser = (ContentCtrl.Content as LoginPage).GetUser();
+
+                var page = new TestsPage(loggedUser);
+                ContentCtrl.Content = page;
+            }
         }
 
 
