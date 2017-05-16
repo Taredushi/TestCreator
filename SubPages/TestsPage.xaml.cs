@@ -59,5 +59,15 @@ namespace TestCreator.SubPages
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+
+        private void AddTestButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var testdlg = new TestWindow();
+
+            if (testdlg.ShowDialog() == true)
+            {
+                
+            }
+        }
     }
 }

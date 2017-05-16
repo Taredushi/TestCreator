@@ -40,7 +40,7 @@
                         <ListView Grid.Column="0" Margin="5"></ListView>
                         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
                             <Button x:Name="AddTestButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                                    Margin="10,0" ToolTip="Dodaj nowy test">
+                                    Margin="10,0" ToolTip="Dodaj nowy test" Click="AddTestButton_OnClick">
                                 <StackPanel>
                                     <Image Source="..\Resources\add.png" Width="32" Height="32"/>
                                     <TextBlock Text="Dodaj" HorizontalAlignment="Center" Margin="0,5,0,0"/>
