@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestCreator.Enumerators;
 using TestCreator.SubPages;
 
 namespace TestCreator
@@ -23,7 +24,6 @@ namespace TestCreator
     /// </summary>
     public partial class MainWindow : Window
     {
-
 
         public MainWindow()
         {
@@ -38,17 +38,38 @@ namespace TestCreator
         {
             if (e.PropertyName.Equals("UserLogin"))
             {
-                this.ResizeMode = ResizeMode.CanResize;
-                this.Width = 1024;
-                this.Height = 768;
-                ToolBarGrid.Visibility = Visibility.Visible;
-                var loggedUser = (ContentCtrl.Content as LoginPage).GetUser();
-
-                var page = new TestsPage(loggedUser);
-                ContentCtrl.Content = page;
+                SetupForLogged();
             }
         }
 
+        private void SetupForLogged()
+        {
+            this.ResizeMode = ResizeMode.CanResize;
+            this.Width = 1024;
+            this.Height = 768;
+
+            var loggedUser = (ContentCtrl.Content as LoginPage).GetUser();
+
+            var page = new TestsPage(loggedUser);
+            ContentCtrl.Content = page;
+            EnableToolbar((Enums.Role)loggedUser.Role);
+        }
+
+        private void EnableToolbar(Enums.Role role)
+        {
+            ToolBarGrid.Visibility = Visibility.Visible;
+            switch (role)
+            {
+                case Enums.Role.Admin:
+                    BottomToolbar.SetupForAdmin();
+                    break;
+                case Enums.Role.User:
+                    BottomToolbar.SetupForUser();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(role), role, null);
+            }
+        }
 
         #region Events
         public event PropertyChangedEventHandler PropertyChanged;

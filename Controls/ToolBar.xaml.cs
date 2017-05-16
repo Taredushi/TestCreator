@@ -24,5 +24,26 @@ namespace TestCreator.Controls
         {
             InitializeComponent();
         }
+
+        public void SetupForAdmin()
+        {
+            UsersButton.Visibility = Visibility.Visible;
+            TestsButton.Visibility = Visibility.Visible;
+            ImportButton.Visibility = Visibility.Visible;
+            ExportButton.Visibility = Visibility.Visible;
+            RaportsButton.Visibility = Visibility.Visible;
+            SettingsButton.Visibility = Visibility.Visible;
+
+        }
+
+        public void SetupForUser()
+        {
+            UsersButton.Visibility = Visibility.Collapsed;
+            ImportButton.Visibility = Visibility.Collapsed;
+            ExportButton.Visibility = Visibility.Collapsed;
+            TestsButton.Visibility = Visibility.Visible;
+            RaportsButton.Visibility = Visibility.Visible;
+            SettingsButton.Visibility = Visibility.Visible;
+        }
     }
 }

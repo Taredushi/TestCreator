@@ -28,7 +28,39 @@
                 </Border>
                 <Border Grid.Row="2" Background="#FF338D8D" BorderThickness="2" CornerRadius="2">
                     <Grid>
-                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ListView Grid.Column="0" Margin="5"></ListView>
+                        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                            <Button x:Name="AddTestButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                                    Margin="10,0" ToolTip="Dodaj nowy test">
+                                <StackPanel>
+                                    <Image Source="..\Resources\add.png" Width="32" Height="32"/>
+                                    <TextBlock Text="Dodaj" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="EditTestButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  
+                                    Margin="10,0" ToolTip="Edytuj wybrany test">
+                                <StackPanel>
+                                    <Image Source="..\Resources\edit.png" Width="32" Height="32"/>
+                                    <TextBlock Text="Edytuj" HorizontalAlignment="Center"  Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="DeleteTestButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                                    Margin="10,0" ToolTip="Usuń wybrany test">
+                                <StackPanel>
+                                    <Image Source="..\Resources\delete.png" Width="32" Height="32"/>
+                                    <TextBlock Text="Usuń" HorizontalAlignment="Center"  Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
                     </Grid>
                 </Border>
             </Grid>
