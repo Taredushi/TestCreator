@@ -30,10 +30,26 @@ namespace TestCreator.ViewModel
                         new Answer(){IsCorrect = false, Text = "Odpowiedź"},
                         new Answer(){IsCorrect = false, Text = "Odpowiedź"},
                     },
-                    Numer = 1,
+                    Number = 1,
                     Title = "Treść pytania"
                 }
             };
+        }
+
+        public void AddEmptyQuestion()
+        {
+            Questions.Add(new Question()
+            {
+                Answers = new ObservableCollection<Answer>()
+                {
+                    new Answer() {IsCorrect = false, Text = "Odpowiedź"},
+                    new Answer() {IsCorrect = false, Text = "Odpowiedź"},
+                    new Answer() {IsCorrect = false, Text = "Odpowiedź"},
+                    new Answer() {IsCorrect = false, Text = "Odpowiedź"},
+                },
+                Number = Questions.Count + 1,
+                Title = "Treść pytania"
+            });
         }
 
     }

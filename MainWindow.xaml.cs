@@ -32,6 +32,14 @@ namespace TestCreator
             var login = new LoginPage();
             login.PropertyChanged += CurrentPageOnPropertyChanged;
             ContentCtrl.Content = login;
+
+            //do testów okna testów
+            //var testdlg = new TestWindow();
+
+            //if (testdlg.ShowDialog() == true)
+            //{
+
+            //}
         }
 
         private void CurrentPageOnPropertyChanged(object sender, PropertyChangedEventArgs e)

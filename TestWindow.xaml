@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:TestCreator"
         xmlns:vm="clr-namespace:TestCreator.ViewModel"
         mc:Ignorable="d"
-        ResizeMode="CanResizeWithGrip"
-        WindowStyle="ToolWindow">
+        ResizeMode="CanResize"
+        Title="{Binding Title}">
 
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -15,6 +15,32 @@
             <GradientStop Color="#FFB1BFC1" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
+    
+    <Window.Resources>
+        <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Border" SnapsToDevicePixels="true">
+                            <GridViewRowPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsCorrect}" Value="false">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ColorProperty}" Value="true">
+                                            <Setter Property="Background" Value="LimeGreen"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Grid Visibility="Visible">
         <Border CornerRadius="5" Margin="20" BorderThickness="1" Background="#FF302929">
@@ -33,7 +59,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Nazwa: " Grid.Column="0" Foreground="WhiteSmoke"/>
                         <TextBox x:Name="NameTb" Grid.Column="1" TextWrapping="WrapWithOverflow" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
-                                 Background="Transparent" Foreground="WhiteSmoke" Text="{Binding Name}"/>
+                                 Background="Transparent" Foreground="WhiteSmoke" Text="{Binding Name, Mode=TwoWay}"/>
                     </Grid>
                 </Border>
                 <Border Grid.Row="2" Background="#FF338D8D" BorderThickness="2" CornerRadius="2">
@@ -46,11 +72,11 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <ListBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5" ItemsSource="{Binding Path=Questions}">
+                        <ListBox x:Name="QuestionsListBox" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5" ItemsSource="{Binding Path=Questions}" SelectionMode="Single">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Expander Header="{Binding Numer}">
-                                        <Grid>
+                                    <Expander Header="{Binding Number}">
+                                        <Grid Grid.IsSharedSizeScope="True">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="*"/>
@@ -59,22 +85,23 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="Pytanie: " Grid.Column="0" Grid.Row="0"/>
-                                            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Title}"/>
-                                            <ListBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding Answers}">
-                                                <ListBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto"/>
-                                                                <ColumnDefinition Width="*"/>
-                                                            </Grid.ColumnDefinitions>
-                                                            <CheckBox Grid.Column="0" Grid.Row="0" IsChecked="{Binding Path=IsCorrect, Mode=TwoWay}" ToolTip="Zaznacz jeśli jes to poprawna opowiedź"/>
-                                                            <TextBox Grid.Column="1" Text="{Binding Path=Text, Mode=TwoWay}"/>
-                                                        </Grid>
-                                                    </DataTemplate>
-                                                </ListBox.ItemTemplate>
-                                            </ListBox>
+                                            <TextBlock Text="Pytanie: " Grid.Column="0" Grid.Row="0" Margin="5"/>
+                                            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Title, Mode=TwoWay}" TextWrapping="WrapWithOverflow" Margin="5"/>
+                                            <DataGrid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding Answers, Mode=TwoWay}" AutoGenerateColumns="True"
+                                                      AutoGeneratingColumn="AnswersDataGrid_OnAutoGeneratingColumn" CanUserReorderColumns="False" GridLinesVisibility="Horizontal" HeadersVisibility="Column" CanUserSortColumns="False" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" RowDetailsVisibilityMode="Visible">
+                                                <DataGrid.RowStyle>
+                                                    <Style TargetType="DataGridRow">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsCorrect}" Value="false">
+                                                                <Setter Property="Background" Value="Transparent"></Setter>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding IsCorrect}" Value="true">
+                                                                <Setter Property="Background" Value="LimeGreen"></Setter>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </DataGrid.RowStyle>
+                                            </DataGrid>
                                         </Grid>
                                     </Expander>
                                 </DataTemplate>
@@ -83,12 +110,12 @@
 
                         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
                             <Button x:Name="AddButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                                    Margin="10,5" ToolTip="ZDodaj odpowiedź">
-                                <TextBlock Text="Dodaj odpowiedź" HorizontalAlignment="Center" />
+                                    Margin="10,5" ToolTip="ZDodaj odpowiedź" Click="AddQuestionButton_OnClick">
+                                <TextBlock Text="Dodaj pytanie" HorizontalAlignment="Center" />
                             </Button>
                             <Button x:Name="DeleteButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  
-                                    Margin="10,5" ToolTip="Usuń odpowiedź">
-                                <TextBlock Text="Usuń odpowiedź" HorizontalAlignment="Center"/>
+                                    Margin="10,5" ToolTip="Usuń odpowiedź" Click="DeleteQuestionButton_OnClick">
+                                <TextBlock Text="Usuń pytanie" HorizontalAlignment="Center"/>
                             </Button>
                         </StackPanel>
 

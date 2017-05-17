@@ -106,7 +106,7 @@
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Helpers.cs" />
+    <Compile Include="ViewModel\TestHelpers.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
     <Page Include="Controls\SearchField.xaml">
       <SubType>Designer</SubType>
@@ -210,6 +210,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Converter\" />
     <Folder Include="DB\" />
   </ItemGroup>
   <ItemGroup>
