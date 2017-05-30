@@ -72,5 +72,21 @@ namespace TestCreator.Controls
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void SearchBox_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            if (SearchBox.Text.ToLower().Equals("wyszukaj"))
+            {
+                SearchBox.Text = "";
+            }
+        }
+
+        private void SearchBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(SearchBox.Text))
+            {
+                SearchBox.Text = "wyszukaj";
+            }
+        }
     }
 }

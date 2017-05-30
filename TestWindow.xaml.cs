@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TestCreator.Database;
 using TestCreator.ViewModel;
 
 namespace TestCreator
@@ -37,10 +38,10 @@ namespace TestCreator
             }
         }
 
-        public TestWindow()
+        public TestWindow(bool empty)
         {
             InitializeComponent();
-            TestViewModel = new TestViewModel();
+            TestViewModel = new TestViewModel(empty){Title = "Dodaj Test"};
             DataContext = TestViewModel;
         }
 
@@ -113,6 +114,19 @@ namespace TestCreator
             {
                 TestViewModel.Questions[i].Number = TestViewModel.Questions[i].Number - 1;
             }
+        }
+
+        private void OkButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+            DatabaseHelpers.SaveTestToDb(_testViewModel);
+            this.Close();
+        }
+
+        private void CancelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
         }
     }
 }

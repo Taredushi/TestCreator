@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Security.Policy;
 using TestCreator.Database;
 using TestCreator.Enumerators;
@@ -55,6 +56,45 @@ namespace TestCreator.Migrations
 
             context.Users.AddOrUpdate(admin);
             context.Users.AddOrUpdate(user);
+            context.SaveChanges();
+            CreateTests(context);
+        }
+
+        private void CreateTests(MyDbContext context)
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                var test = new Test()
+                {
+                    Name = "Test" + i,
+                    TestID = i,
+                };
+
+                List<Question> questions = new List<Question>();
+                for (int j = 1; j <= 5; j++)
+                {
+                    var question = new Question()
+                    {
+                        Text = "Pytanie "+ j,
+                    };
+
+                    List<Answer> answers = new List<Answer>();
+                    for (int k = 1; k <= 4; k++)
+                    {
+                        var answer = new Answer()
+                        {
+                            IsCorrect = k%2 == 0,
+                            Text = "Odpowiedz " + k
+                        };
+                        answers.Add(answer);
+                    }
+                    question.Answers = answers;
+                    questions.Add(question);
+                }
+                test.Questions = questions;
+                context.Tests.AddOrUpdate(test);
+            }
+            context.SaveChanges();
         }
     }
 }

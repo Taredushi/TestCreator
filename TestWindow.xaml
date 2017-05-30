@@ -121,11 +121,11 @@
 
                         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                             <Button x:Name="OkButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                                    Margin="10,5" ToolTip="Zatwierdź zmiany i wyjdź">
+                                    Margin="10,5" ToolTip="Zatwierdź zmiany i wyjdź" Click="OkButton_OnClick">
                                 <TextBlock Text="Zatwierdź" HorizontalAlignment="Center" />
                             </Button>
                             <Button x:Name="CancelButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  
-                                    Margin="10,5" ToolTip="Anuluj zmiany i zamknij okno">
+                                    Margin="10,5" ToolTip="Anuluj zmiany i zamknij okno" Click="CancelButton_OnClick">
                                 <TextBlock Text="Zakończ" HorizontalAlignment="Center"/>
                             </Button>
                         </StackPanel>

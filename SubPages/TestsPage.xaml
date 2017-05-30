@@ -23,7 +23,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Wyszukaj" Grid.Column="0" FontSize="15" Foreground="WhiteSmoke" Margin="15,5" VerticalAlignment="Center"/>
-                        <controls:SearchField x:Name="SearchField" Grid.Column="1" FSize="14" ForeColor="DimGray" Margin="5"/>
+                        <controls:SearchField x:Name="SearchField" Grid.Column="1" FSize="14" ForeColor="DimGray" Margin="5" KeyDown="SearchField_OnKeyDown"/>
                     </Grid>
                 </Border>
                 <Border Grid.Row="2" Background="#FF338D8D" BorderThickness="2" CornerRadius="2">
@@ -34,11 +34,27 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <ListView Grid.Column="0" Margin="5"></ListView>
-                        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                        <Border Grid.Column="0" Grid.Row="1" BorderThickness="2" CornerRadius="10" BorderBrush="#FF266ABB" Background="#FF235B89"  Margin="5,5,5,20">
+                            <ListView x:Name="TestsListView" Background="#FF235B89" BorderThickness="0" Margin="3">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Source="..\Resources\document.png" Margin="5"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding Name}" Foreground="WhiteSmoke" FontSize="12" FontFamily="Stencil" VerticalAlignment="Center" Margin="5"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        </Border>
+                        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
                             <Button x:Name="AddTestButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                                     Margin="10,0" ToolTip="Dodaj nowy test" Click="AddTestButton_OnClick">
                                 <StackPanel>

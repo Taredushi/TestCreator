@@ -14,7 +14,8 @@ namespace TestCreator.Database
 
         public int TestID { get; set; }
         public Test Test { get; set; }
-        public virtual ICollection<Question> Questions { get; set; }
+
+        public virtual ICollection<Answer> Answers { get; set; }
 
         [NotMapped]
         public int MaxPoints { get; }

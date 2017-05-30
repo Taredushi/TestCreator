@@ -12,9 +12,9 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox BorderThickness="0" Grid.Column="0" Text="{Binding Path=SearchText}"
+                <TextBox x:Name="SearchBox" BorderThickness="0" Grid.Column="0" Text="{Binding Path=SearchText}"
                          HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Background="WhiteSmoke" 
-                         Foreground="{Binding Path=ForeColor}" FontSize="{Binding Path=FSize}"/>
+                         Foreground="{Binding Path=ForeColor}" FontSize="{Binding Path=FSize}" GotFocus="SearchBox_OnGotFocus" LostFocus="SearchBox_OnLostFocus"/>
                 <Image Source="..\Resources\search.png" Height="24" Width="24" HorizontalAlignment="Right" Grid.Column="1"/>
             </Grid>
         </Border>

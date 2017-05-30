@@ -89,6 +89,7 @@
     </Compile>
     <Compile Include="Database\Answer.cs" />
     <Compile Include="Database\Encryptor.cs" />
+    <Compile Include="Database\DatabaseHelpers.cs" />
     <Compile Include="Database\MyDbContext.cs" />
     <Compile Include="Database\Question.cs" />
     <Compile Include="Database\Test.cs" />
@@ -98,6 +99,10 @@
     <Compile Include="Migrations\201705101740279_init.cs" />
     <Compile Include="Migrations\201705101740279_init.Designer.cs">
       <DependentUpon>201705101740279_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705301900074_init2.cs" />
+    <Compile Include="Migrations\201705301900074_init2.Designer.cs">
+      <DependentUpon>201705301900074_init2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SubPages\TestsPage.xaml.cs">
@@ -161,6 +166,9 @@
     <EmbeddedResource Include="Migrations\201705101740279_init.resx">
       <DependentUpon>201705101740279_init.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705301900074_init2.resx">
+      <DependentUpon>201705301900074_init2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -217,6 +225,9 @@
     <Resource Include="Resources\add.png" />
     <Resource Include="Resources\delete.png" />
     <Resource Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\document.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
