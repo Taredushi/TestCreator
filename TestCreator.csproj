@@ -81,6 +81,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\Combobox.xaml.cs">
+      <DependentUpon>Combobox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SearchField.xaml.cs">
       <DependentUpon>SearchField.xaml</DependentUpon>
     </Compile>
@@ -104,6 +107,10 @@
     <Compile Include="Migrations\201705301900074_init2.Designer.cs">
       <DependentUpon>201705301900074_init2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705311809369_QuestionsLimit.cs" />
+    <Compile Include="Migrations\201705311809369_QuestionsLimit.Designer.cs">
+      <DependentUpon>201705311809369_QuestionsLimit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SubPages\TestsPage.xaml.cs">
       <DependentUpon>TestsPage.xaml</DependentUpon>
@@ -113,6 +120,10 @@
     </Compile>
     <Compile Include="ViewModel\TestHelpers.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
+    <Page Include="Controls\Combobox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SearchField.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705301900074_init2.resx">
       <DependentUpon>201705301900074_init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705311809369_QuestionsLimit.resx">
+      <DependentUpon>201705311809369_QuestionsLimit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

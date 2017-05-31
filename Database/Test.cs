@@ -10,6 +10,7 @@ namespace TestCreator.Database
     {
         public int TestID { get; set; }
         public string Name { get; set; }
+        public int QuestionsLimit { get; set; }
 
         public virtual ICollection<UserTest> Tests { get; set; }
         public virtual ICollection<Question> Questions { get; set; }

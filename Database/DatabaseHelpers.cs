@@ -22,5 +22,11 @@ namespace TestCreator.Database
             var db = new MyDbContext();
             return db.Tests.ToList();
         }
+
+        public static Test GetTestByID(int id)
+        {
+            var db = new MyDbContext();
+            return db.Tests.Single(x => x.TestID == id);
+        }
     }
 }

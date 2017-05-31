@@ -62,16 +62,19 @@ namespace TestCreator.Migrations
 
         private void CreateTests(MyDbContext context)
         {
+            Random rand = new Random();
+
             for (int i = 1; i <= 10; i++)
             {
                 var test = new Test()
                 {
                     Name = "Test" + i,
                     TestID = i,
+                    QuestionsLimit = rand.Next(3, 10)
                 };
 
                 List<Question> questions = new List<Question>();
-                for (int j = 1; j <= 5; j++)
+                for (int j = 1; j <= 10; j++)
                 {
                     var question = new Question()
                     {

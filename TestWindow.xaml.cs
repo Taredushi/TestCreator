@@ -38,6 +38,13 @@ namespace TestCreator
             }
         }
 
+        public TestWindow(TestViewModel _testViewModel)
+        {
+            InitializeComponent();
+            this._testViewModel = _testViewModel;
+            DataContext = TestViewModel;
+        }
+
         public TestWindow(bool empty)
         {
             InitializeComponent();
@@ -108,6 +115,8 @@ namespace TestCreator
         private void DeleteQuestionButton_OnClick(object sender, RoutedEventArgs e)
         {
             int index = QuestionsListBox.SelectedIndex;
+            if (index == -1) return;
+
             TestViewModel.Questions.RemoveAt(index);
 
             for (int i = index; i < TestViewModel.Questions.Count; i++)
@@ -127,6 +136,32 @@ namespace TestCreator
         {
             this.DialogResult = false;
             this.Close();
+        }
+
+        private void LimitTb_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+           if (LimitTb.Text.Length > 3)
+           {
+               LimitTb.Text = LimitTb.Text.Remove(3);
+               LimitTb.CaretIndex = LimitTb.Text.Length;
+           }
+        }
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count == 0) return;
+
+            var datagrid = sender as DataGrid;
+
+            if (datagrid == null) return;
+            if (datagrid.CurrentCell.Column.Header.Equals("Poprawna"))
+            {
+                var item = (e.AddedItems[0] as TestCreator.ViewModel.Answer);
+                if (item != null)
+                    item.IsCorrect = !item.IsCorrect;
+            }
+            datagrid?.UnselectAllCells();
+
         }
     }
 }

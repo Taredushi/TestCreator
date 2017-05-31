@@ -56,10 +56,19 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Nazwa: " Grid.Column="0" Foreground="WhiteSmoke"/>
-                        <TextBox x:Name="NameTb" Grid.Column="1" TextWrapping="WrapWithOverflow" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                        <TextBlock Text="Nazwa: " Grid.Column="0" Foreground="WhiteSmoke" VerticalAlignment="Center"/>
+                        <TextBox x:Name="NameTb" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="NoWrap" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
                                  Background="Transparent" Foreground="WhiteSmoke" Text="{Binding Name, Mode=TwoWay}"/>
+                        <StackPanel Grid.Column="4" Orientation="Horizontal" Margin="5,0">
+                            <TextBlock Text="Ilość pytań: " VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="5,0"/>
+                            <TextBox x:Name="LimitTb" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                                     Background="Transparent" Foreground="WhiteSmoke" Text="{Binding QuestionsLimit, Mode=TwoWay, ValidatesOnDataErrors=True}" TextWrapping="NoWrap"
+                                     Padding="5,0" Width="50" TextChanged="LimitTb_OnTextChanged"/>
+                        </StackPanel>
                     </Grid>
                 </Border>
                 <Border Grid.Row="2" Background="#FF338D8D" BorderThickness="2" CornerRadius="2">
@@ -72,10 +81,11 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <ListBox x:Name="QuestionsListBox" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5" ItemsSource="{Binding Path=Questions}" SelectionMode="Single">
+                        <ListBox x:Name="QuestionsListBox" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5" ItemsSource="{Binding Path=Questions}" SelectionMode="Single"
+                                 Background="#FF235B89">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Expander Header="{Binding Number}">
+                                    <Expander Header="{Binding Number}" Foreground="WhiteSmoke">
                                         <Grid Grid.IsSharedSizeScope="True">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
@@ -88,12 +98,15 @@
                                             <TextBlock Text="Pytanie: " Grid.Column="0" Grid.Row="0" Margin="5"/>
                                             <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Title, Mode=TwoWay}" TextWrapping="WrapWithOverflow" Margin="5"/>
                                             <DataGrid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding Answers, Mode=TwoWay}" AutoGenerateColumns="True"
-                                                      AutoGeneratingColumn="AnswersDataGrid_OnAutoGeneratingColumn" CanUserReorderColumns="False" GridLinesVisibility="Horizontal" HeadersVisibility="Column" CanUserSortColumns="False" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" RowDetailsVisibilityMode="Visible">
+                                                      AutoGeneratingColumn="AnswersDataGrid_OnAutoGeneratingColumn" CanUserReorderColumns="False" GridLinesVisibility="Horizontal" 
+                                                      HeadersVisibility="Column" CanUserSortColumns="False" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" 
+                                                      RowDetailsVisibilityMode="Visible" Background="#FF235B89" SelectionChanged="Selector_OnSelectionChanged">
                                                 <DataGrid.RowStyle>
                                                     <Style TargetType="DataGridRow">
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding IsCorrect}" Value="false">
                                                                 <Setter Property="Background" Value="Transparent"></Setter>
+                                                                <Setter Property="Foreground" Value="WhiteSmoke"></Setter>
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding IsCorrect}" Value="true">
                                                                 <Setter Property="Background" Value="LimeGreen"></Setter>
