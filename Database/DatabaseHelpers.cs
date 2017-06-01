@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,33 @@ namespace TestCreator.Database
         public static void SaveTestToDb(TestViewModel testView)
         {
             var db = new MyDbContext();
-            db.Tests.AddOrUpdate(testView.GetTest());
+            var test = testView.GetTest();
+            db.Tests.AddOrUpdate(test);
+            db.SaveChanges();
+        }
+
+        public static void RemoveTestByID(int id)
+        {
+            var db = new MyDbContext();
+
+            if (db.Tests.Any(x => x.TestID == id))
+            {
+                foreach (var arg in db.Tests.Where(x => x.TestID == id))
+                {
+                    db.Tests.Remove(arg);
+                }
+            }
+            db.SaveChanges();
+        }
+
+
+        public static void SaveQuestionToDb(TestViewModel testView)
+        {
+            var db = new MyDbContext();
+            foreach (var arg in testView.GetQuestions())
+            {
+                db.Questions.AddOrUpdate(arg);
+            }
             db.SaveChanges();
         }
 
@@ -27,6 +54,18 @@ namespace TestCreator.Database
         {
             var db = new MyDbContext();
             return db.Tests.Single(x => x.TestID == id);
+        }
+
+        public static Question GetQuestionByID(int id)
+        {
+            var db = new MyDbContext();
+            return db.Questions.Single(x => x.QuestionID == id);
+        }
+
+        public static Answer GetAnswerByID(int id)
+        {
+            var db = new MyDbContext();
+            return db.Answers.Single(x => x.AnswerID == id);
         }
     }
 }

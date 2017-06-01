@@ -50,44 +50,52 @@ namespace TestCreator.ViewModel
 
         public Test GetTest()
         {
-            Test test = new Test()
-            {
-                Name = this.Name,
-                QuestionsLimit = int.Parse(QuestionsLimit)
-            };
+            Test test = new Test();
+            test.Name = this.Name;
+            test.QuestionsLimit = int.Parse(QuestionsLimit);
+            test.Questions = GetQuestions();
 
             if (ID != 0)
             {
                 test.TestID = ID;
             }
+            
+            return test;
+        }
 
+        public List<Database.Question> GetQuestions()
+        {
             List<Database.Question> questions = new List<Database.Question>();
 
             foreach (var question in Questions)
             {
-                Database.Question tmp = new Database.Question()
+
+                Database.Question tmp = new Database.Question();
+                tmp.Text = question.Title;
+                if (question.ID != 0)
                 {
-                    Text = question.Title
-                };
+                    tmp.QuestionID = question.ID;
+                }
 
                 List<Database.Answer> answers = new List<Database.Answer>();
 
                 foreach (var answer in question.Answers)
                 {
-                    Database.Answer newAnswer = new Database.Answer()
+                    Database.Answer newAnswer = new Database.Answer();
+                    newAnswer.IsCorrect = answer.IsCorrect;
+                    newAnswer.Text = answer.Text;
+                    if (answer.ID != 0)
                     {
-                        IsCorrect = answer.IsCorrect,
-                        Text = answer.Text
-                    };
+                        newAnswer.AnswerID = answer.ID;
+                    }
+
                     answers.Add(newAnswer);
                 }
 
                 tmp.Answers = answers;
                 questions.Add(tmp);
             }
-            test.Questions = questions;
-
-            return test;
+            return questions;
         }
 
         public void CreateSimpleModel(Test test)
@@ -109,7 +117,8 @@ namespace TestCreator.ViewModel
                 var newQuestion =  new Question()
                 {
                     Number = Questions.Count + 1,
-                    Title = question.Text
+                    Title = question.Text,
+                    ID = question.QuestionID
                 };
 
                 newQuestion.Answers = new ObservableCollection<Answer>();
@@ -119,14 +128,13 @@ namespace TestCreator.ViewModel
                     newQuestion.Answers.Add(new Answer()
                     {
                         Text = answer.Text,
-                        IsCorrect = answer.IsCorrect
+                        IsCorrect = answer.IsCorrect,
+                        ID = answer.AnswerID
                     });
                 }
 
                 Questions.Add(newQuestion);
             }
-
-
         }
 
         #region IDataErrorInfo implementation

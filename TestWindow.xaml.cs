@@ -128,6 +128,10 @@ namespace TestCreator
         private void OkButton_OnClick(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
+            if (_testViewModel.ID != 0)
+            {
+                DatabaseHelpers.RemoveTestByID(_testViewModel.ID);
+            }
             DatabaseHelpers.SaveTestToDb(_testViewModel);
             this.Close();
         }

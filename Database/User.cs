@@ -17,6 +17,6 @@ namespace TestCreator.Database
         public string Surname { get; set; }
         public string Email { get; set; }
 
-        public ICollection<UserTest> Tests { get; set; }
+        public virtual ICollection<UserTest> Tests { get; set; }
     }
 }

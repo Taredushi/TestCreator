@@ -17,6 +17,7 @@ namespace TestCreator.ViewModel
     {
         private int _number;
         private string _title;
+        public int ID;
 
         public int Number
         {
@@ -58,6 +59,7 @@ namespace TestCreator.ViewModel
     {
         private bool _isCorrext;
         private string _text;
+        public int ID;
 
         [DisplayName("Poprawna")]
         public bool IsCorrect
