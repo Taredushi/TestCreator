@@ -90,6 +90,9 @@
     <Compile Include="Controls\ToolBar.xaml.cs">
       <DependentUpon>ToolBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TopPanel.xaml.cs">
+      <DependentUpon>TopPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Database\Answer.cs" />
     <Compile Include="Database\Encryptor.cs" />
     <Compile Include="Database\DatabaseHelpers.cs" />
@@ -98,7 +101,9 @@
     <Compile Include="Database\Test.cs" />
     <Compile Include="Database\User.cs" />
     <Compile Include="Database\UserTest.cs" />
-    <Compile Include="Enumerators\Enums.cs" />
+    <Compile Include="Enumerators\Role.cs" />
+    <Compile Include="Enumerators\ToolbarOption.cs" />
+    <Compile Include="Events\ToolBarEventArgs.cs" />
     <Compile Include="Migrations\201705101740279_init.cs" />
     <Compile Include="Migrations\201705101740279_init.Designer.cs">
       <DependentUpon>201705101740279_init.cs</DependentUpon>
@@ -115,11 +120,15 @@
     <Compile Include="SubPages\TestsPage.xaml.cs">
       <DependentUpon>TestsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SubPages\UsersPage.xaml.cs">
+      <DependentUpon>UsersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\TestHelpers.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
     <Page Include="Controls\Combobox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TopPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,6 +165,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="SubPages\TestsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubPages\UsersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,6 +259,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

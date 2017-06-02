@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace TestCreator.Enumerators
 {
-    public class Enums
+    public enum Role
     {
-        public enum Role
-        {
-            Admin,
-            User
-        }
+        Admin,
+        User
     }
 }

@@ -38,7 +38,7 @@ namespace TestCreator.Migrations
                 Login = "admin",
                 Name = "Admin",
                 Password = Encryptor.MD5Hash("admin"),
-                Role = (int) Enums.Role.Admin,
+                Role = (int) Role.Admin,
                 Surname = "Root",
                 UserID = 1
             };
@@ -49,7 +49,7 @@ namespace TestCreator.Migrations
                 Login = "user",
                 Name = "User",
                 Password = Encryptor.MD5Hash("user"),
-                Role = (int)Enums.Role.User,
+                Role = (int)Role.User,
                 Surname = "Normal",
                 UserID = 2
             };

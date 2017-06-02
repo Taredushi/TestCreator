@@ -130,9 +130,15 @@ namespace TestCreator
             this.DialogResult = true;
             if (_testViewModel.ID != 0)
             {
+                var test = DatabaseHelpers.GetTestByID(_testViewModel.ID);
                 DatabaseHelpers.RemoveTestByID(_testViewModel.ID);
+                DatabaseHelpers.SaveTestToDb(test);
             }
-            DatabaseHelpers.SaveTestToDb(_testViewModel);
+            else
+            {
+                DatabaseHelpers.SaveTestToDb(_testViewModel);
+            }
+            
             this.Close();
         }
 

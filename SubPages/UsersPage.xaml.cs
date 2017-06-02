@@ -22,44 +22,44 @@ using TestCreator.ViewModel;
 namespace TestCreator.SubPages
 {
     /// <summary>
-    /// Interaction logic for TestsPage.xaml
+    /// Interaction logic for UsersPage.xaml
     /// </summary>
-    public partial class TestsPage
+    public partial class UsersPage : UserControl
     {
-        public ObservableCollection<TestViewModel> TestCollection { get; set; }
-
         public string Title { get; set; }
 
-        public TestsPage()
+        public ObservableCollection<UserViewModel> UserCollection { get; set; }
+
+        public UsersPage()
         {
             InitializeComponent();
-            TestCollection = new ObservableCollection<TestViewModel>();
-            LoadTestList();
-            TestsListView.ItemsSource = TestCollection;
+            UserCollection = new ObservableCollection<UserViewModel>();
+            LoadUsersList();
+            UsersListView.ItemsSource = UserCollection;
             InitializeSortCombobox();
             DataContext = this;
             TopPanel.Logout += Logout;
-            Title = "Testy";
+            Title = "Użytkownicy";
         }
 
-        public TestsPage(User user)
+        public UsersPage(User user)
         {
             InitializeComponent();
             LoggedUser = user;
-            TestCollection = new ObservableCollection<TestViewModel>();
-            LoadTestList();
-            TestsListView.ItemsSource = TestCollection;
+            UserCollection = new ObservableCollection<UserViewModel>();
+            LoadUsersList();
+            UsersListView.ItemsSource = UserCollection;
             InitializeSortCombobox();
             DataContext = this;
             TopPanel.Logout += Logout;
-            Title = "Testy";
+            Title = "Użytkownicy";
         }
 
         private ListCollectionView View
         {
             get
             {
-                return (ListCollectionView)CollectionViewSource.GetDefaultView(TestCollection);
+                return (ListCollectionView)CollectionViewSource.GetDefaultView(UserCollection);
             }
         }
 
@@ -71,15 +71,15 @@ namespace TestCreator.SubPages
             SortCombobox.PropertyChanged += SortComboboxOnPropertyChanged;
         }
 
-        private void LoadTestList()
+        private void LoadUsersList()
         {
-            TestCollection.Clear();
-            var list = DatabaseHelpers.GetAllTest();
-            foreach (var test in list)
+            UserCollection.Clear();
+            var list = DatabaseHelpers.GetAllUsers();
+            foreach (var user in list)
             {
-                var testViewModel = new TestViewModel(false);
-                testViewModel.CreateSimpleModel(test);
-                TestCollection.Add(testViewModel);
+                var userViewModel = new UserViewModel();
+                userViewModel.CreateSimpleModel(user);
+                UserCollection.Add(userViewModel);
             }
         }
 
@@ -87,7 +87,7 @@ namespace TestCreator.SubPages
         #region Dependency Properties
 
         public static readonly DependencyProperty UserPropert = DependencyProperty.Register(
-            "LoggedUser", typeof(User), typeof(TestsPage), new PropertyMetadata(default(User)));
+            "LoggedUser", typeof(User), typeof(UsersPage), new PropertyMetadata(default(User)));
 
         public User LoggedUser
         {
@@ -96,12 +96,12 @@ namespace TestCreator.SubPages
             {
                 SetValue(UserPropert, value);
                 LoggedUserName = LoggedUser.Name + " " + LoggedUser.Surname;
-                LoggedUserRole = Enum.GetName(typeof(Role), (Role) LoggedUser.Role);
+                LoggedUserRole = Enum.GetName(typeof(Role), (Role)LoggedUser.Role);
             }
         }
 
         public static readonly DependencyProperty UserNamePropert = DependencyProperty.Register(
-            "LoggedUserName", typeof(string), typeof(TestsPage), new PropertyMetadata(default(string)));
+            "LoggedUserName", typeof(string), typeof(UsersPage), new PropertyMetadata(default(string)));
 
         public string LoggedUserName
         {
@@ -113,7 +113,7 @@ namespace TestCreator.SubPages
         }
 
         public static readonly DependencyProperty UserRolePropert = DependencyProperty.Register(
-            "LoggedUserRole", typeof(string), typeof(TestsPage), new PropertyMetadata(default(string)));
+            "LoggedUserRole", typeof(string), typeof(UsersPage), new PropertyMetadata(default(string)));
 
         public string LoggedUserRole
         {
@@ -141,10 +141,10 @@ namespace TestCreator.SubPages
                     var search = SearchField.SearchBox.Text.ToLower();
                     View.Filter = delegate (object item)
                     {
-                        var test = item as TestViewModel;
+                        var test = item as UserViewModel;
                         if (test != null)
                         {
-                            return test.Name.ToLower().Contains(search);
+                            return test.FullName.ToLower().Contains(search);
                         }
                         return false;
                     };
@@ -156,17 +156,17 @@ namespace TestCreator.SubPages
         private void SortComboboxOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
 
-            if (SortCombobox.SelectedItem.Equals("Nazwa"))
+            if (SortCombobox.SelectedItem.Equals("Imię"))
             {
-                View.CustomSort = new SortByName();
+                View.CustomSort = new SubPages.UsersPage.SortByName();
             }
-            else if (SortCombobox.SelectedItem.Equals("Ilość pytań"))
+            else if (SortCombobox.SelectedItem.Equals("Nazwisko"))
             {
-                View.CustomSort = new SortByQuestionsLimit();
+                View.CustomSort = new SubPages.UsersPage.SortBySurame();
             }
-            else if (SortCombobox.SelectedItem.Equals("Wszystkich pytań"))
+            else if (SortCombobox.SelectedItem.Equals("Rola"))
             {
-                View.CustomSort = new SortBySortQuestionsNumber();
+                View.CustomSort = new SubPages.UsersPage.SortByRole();
             }
         }
 
@@ -184,21 +184,21 @@ namespace TestCreator.SubPages
         {
             public int Compare(object x, object y)
             {
-                TestViewModel test1 = (TestViewModel)x;
-                TestViewModel test2 = (TestViewModel)y;
+                UserViewModel user1 = (UserViewModel)x;
+                UserViewModel user2 = (UserViewModel)y;
                 try
                 {
 
-                    return String.Compare(test1.Name, test2.Name, StringComparison.Ordinal);
+                    return String.Compare(user1.Name, user2.Name, StringComparison.Ordinal);
                 }
                 catch (Exception)
                 {
 
-                    if (string.IsNullOrEmpty(test1.Name))
+                    if (string.IsNullOrEmpty(user1.Name))
                     {
                         return -1;
                     }
-                    else if (string.IsNullOrEmpty(test2.Name))
+                    else if (string.IsNullOrEmpty(user2.Name))
                     {
                         return 1;
                     }
@@ -208,39 +208,55 @@ namespace TestCreator.SubPages
             }
         }
 
-        private class SortByQuestionsLimit : System.Collections.IComparer
+        private class SortBySurame : System.Collections.IComparer
         {
             public int Compare(object x, object y)
             {
-                TestViewModel test1 = (TestViewModel)x;
-                TestViewModel test2 = (TestViewModel)y;
+                UserViewModel user1 = (UserViewModel)x;
+                UserViewModel user2 = (UserViewModel)y;
                 try
                 {
-                    int one = int.Parse(test1.QuestionsLimit);
-                    int two = int.Parse(test2.QuestionsLimit);
 
-                    return one.CompareTo(two);
+                    return String.Compare(user1.Surname, user2.Surname, StringComparison.Ordinal);
                 }
                 catch (Exception)
                 {
+
+                    if (string.IsNullOrEmpty(user1.Name))
+                    {
+                        return -1;
+                    }
+                    else if (string.IsNullOrEmpty(user2.Name))
+                    {
+                        return 1;
+                    }
                     return 0;
                 }
 
             }
         }
 
-        private class SortBySortQuestionsNumber : System.Collections.IComparer
+        private class SortByRole : System.Collections.IComparer
         {
             public int Compare(object x, object y)
             {
-                TestViewModel test1 = (TestViewModel)x;
-                TestViewModel test2 = (TestViewModel)y;
+                UserViewModel user1 = (UserViewModel)x;
+                UserViewModel user2 = (UserViewModel)y;
                 try
                 {
-                    return test1.QuestionsNumber.CompareTo(test2.QuestionsNumber);
+                    return ((int) user1.Role).CompareTo((int) user2.Role);
                 }
                 catch (Exception)
                 {
+
+                    if (string.IsNullOrEmpty(user1.Name))
+                    {
+                        return -1;
+                    }
+                    else if (string.IsNullOrEmpty(user2.Name))
+                    {
+                        return 1;
+                    }
                     return 0;
                 }
 
@@ -249,35 +265,36 @@ namespace TestCreator.SubPages
         #endregion
 
         #region TestButtons
-        private void AddTestButton_OnClick(object sender, RoutedEventArgs e)
+        private void AddUserButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var testdlg = new TestWindow(true);
+            //var testdlg = new TestWindow(true);
 
-            if (testdlg.ShowDialog() == true)
-            {
-                LoadTestList();
-            }
+            //if (testdlg.ShowDialog() == true)
+            //{
+            //    LoadUsersList();
+            //}
         }
 
-        private void DeleteTestButton_OnClick(object sender, RoutedEventArgs e)
+        private void DeleteUserButton_OnClick(object sender, RoutedEventArgs e)
         {
-            TestCollection.Remove(TestsListView.SelectedItem as TestViewModel);
+            UserCollection.Remove(UsersListView.SelectedItem as UserViewModel);
         }
 
-        private void EditTestButton_OnClick(object sender, RoutedEventArgs e)
+        private void EditUserButton_OnClick(object sender, RoutedEventArgs e)
         {
-            
-            var test = DatabaseHelpers.GetTestByID((TestsListView.SelectedItem as TestViewModel).ID);
-            var model = new TestViewModel(false);
-            model.Title = "Edytuj test";
-            model.CreateModel(test);
 
-            var testdlg = new TestWindow(model);
+            var user = DatabaseHelpers.GetTestByID((UsersListView.SelectedItem as UserViewModel).ID);
 
-            if (testdlg.ShowDialog() == true)
-            {
-                LoadTestList();
-            }
+            //var model = new TestViewModel(false);
+            //model.Title = "Edytuj test";
+            //model.CreateModel(test);
+
+            //var testdlg = new TestWindow(model);
+
+            //if (testdlg.ShowDialog() == true)
+            //{
+            //    LoadUsersList();
+            //}
 
         }
         #endregion

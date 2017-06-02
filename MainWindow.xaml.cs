@@ -14,7 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestCreator.Database;
 using TestCreator.Enumerators;
+using TestCreator.Events;
 using TestCreator.SubPages;
 
 namespace TestCreator
@@ -25,13 +27,38 @@ namespace TestCreator
     public partial class MainWindow : Window
     {
 
+        private User _loggedUser;
+
         public MainWindow()
         {
             InitializeComponent();
+            BottomToolbar.ButtonClicked += BottomToolbarOnButtonClicked;
             this.ResizeMode = ResizeMode.CanMinimize;
             var login = new LoginPage();
             login.PropertyChanged += CurrentPageOnPropertyChanged;
             ContentCtrl.Content = login;
+        }
+
+        private void BottomToolbarOnButtonClicked(object sender, EventArgs e)
+        {
+            if ((e as ToolBarEventArgs) == null) return;
+            switch (((ToolBarEventArgs) e).Option)
+            {
+                case ToolbarOption.Test:
+                    CreateTestPage();
+                    break;
+                case ToolbarOption.User:
+                    CreateUserPage();
+                    break;
+                case ToolbarOption.Import:
+                    break;
+                case ToolbarOption.Export:
+                    break;
+                case ToolbarOption.Statistics:
+                    break;
+                case ToolbarOption.Settings:
+                    break;
+            }
         }
 
         private void CurrentPageOnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -39,6 +66,10 @@ namespace TestCreator
             if (e.PropertyName.Equals("UserLogin"))
             {
                 SetupForLogged();
+            }
+            else if (e.PropertyName.Equals("Logout"))
+            {
+                SetupLoginPage();
             }
         }
 
@@ -48,22 +79,32 @@ namespace TestCreator
             this.Width = 1024;
             this.Height = 768;
 
-            var loggedUser = (ContentCtrl.Content as LoginPage).GetUser();
-
-            var page = new TestsPage(loggedUser);
-            ContentCtrl.Content = page;
-            EnableToolbar((Enums.Role)loggedUser.Role);
+            _loggedUser = (ContentCtrl.Content as LoginPage).GetUser();
+            CreateTestPage();
         }
 
-        private void EnableToolbar(Enums.Role role)
+        private void SetupLoginPage()
+        {
+            this.ResizeMode = ResizeMode.CanMinimize;
+            this.SizeToContent = SizeToContent.WidthAndHeight;
+            this.Width = 550;
+            this.Height = 450;
+
+            var page = new LoginPage();
+            page.PropertyChanged += CurrentPageOnPropertyChanged;
+            ContentCtrl.Content = page;
+            ToolBarGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void EnableToolbar(Role role)
         {
             ToolBarGrid.Visibility = Visibility.Visible;
             switch (role)
             {
-                case Enums.Role.Admin:
+                case Role.Admin:
                     BottomToolbar.SetupForAdmin();
                     break;
-                case Enums.Role.User:
+                case Role.User:
                     BottomToolbar.SetupForUser();
                     break;
                 default:
@@ -71,6 +112,22 @@ namespace TestCreator
             }
         }
 
+        #region Creating pages
+        private void CreateTestPage()
+        {
+            var page = new TestsPage(_loggedUser);
+            page.PropertyChanged += CurrentPageOnPropertyChanged;
+            ContentCtrl.Content = page;
+            EnableToolbar((Role)_loggedUser.Role);
+        }
+        private void CreateUserPage()
+        {
+            var page = new UsersPage(_loggedUser);
+            page.PropertyChanged += CurrentPageOnPropertyChanged;
+            ContentCtrl.Content = page;
+            EnableToolbar((Role)_loggedUser.Role);
+        }
+        #endregion
         #region Events
         public event PropertyChangedEventHandler PropertyChanged;
 

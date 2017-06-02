@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestCreator.Enumerators;
+using TestCreator.Events;
 
 namespace TestCreator.Controls
 {
@@ -31,7 +33,7 @@ namespace TestCreator.Controls
             TestsButton.Visibility = Visibility.Visible;
             ImportButton.Visibility = Visibility.Visible;
             ExportButton.Visibility = Visibility.Visible;
-            RaportsButton.Visibility = Visibility.Visible;
+            StatisticsButton.Visibility = Visibility.Visible;
             SettingsButton.Visibility = Visibility.Visible;
 
         }
@@ -42,8 +44,40 @@ namespace TestCreator.Controls
             ImportButton.Visibility = Visibility.Collapsed;
             ExportButton.Visibility = Visibility.Collapsed;
             TestsButton.Visibility = Visibility.Visible;
-            RaportsButton.Visibility = Visibility.Visible;
+            StatisticsButton.Visibility = Visibility.Visible;
             SettingsButton.Visibility = Visibility.Visible;
+        }
+
+        public event EventHandler ButtonClicked;
+
+        private void UsersButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ButtonClicked?.Invoke(this, new ToolBarEventArgs(){Option = ToolbarOption.User});
+        }
+
+        private void TestsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ButtonClicked?.Invoke(this, new ToolBarEventArgs() { Option = ToolbarOption.Test });
+        }
+
+        private void ImportButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ButtonClicked?.Invoke(this, new ToolBarEventArgs() { Option = ToolbarOption.Import });
+        }
+
+        private void ExportButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ButtonClicked?.Invoke(this, new ToolBarEventArgs() { Option = ToolbarOption.Export });
+        }
+
+        private void StatisticsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ButtonClicked?.Invoke(this, new ToolBarEventArgs() { Option = ToolbarOption.Statistics });
+        }
+
+        private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ButtonClicked?.Invoke(this, new ToolBarEventArgs() { Option = ToolbarOption.Settings });
         }
     }
 }

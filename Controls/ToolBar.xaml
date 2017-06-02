@@ -7,42 +7,42 @@
              mc:Ignorable="d">
     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
-        <Button x:Name="UsersButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Użytkownicy" Margin="10,0">
+        <Button x:Name="UsersButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Użytkownicy" Margin="10,0" Click="UsersButton_OnClick">
             <StackPanel>
                 <Image Source="..\Resources\group.png" Width="32" Height="32"/>
                 <TextBlock Text="Użytkownicy" HorizontalAlignment="Center"  Margin="0,5,0,0"/>
             </StackPanel>
         </Button>
 
-        <Button x:Name="TestsButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Testy" Margin="10,0">
+        <Button x:Name="TestsButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Testy" Margin="10,0" Click="TestsButton_OnClick">
             <StackPanel>
                 <Image Source="..\Resources\test.png" Width="32" Height="32"/>
                 <TextBlock Text="Testy" HorizontalAlignment="Center" Margin="0,5,0,0"/>
             </StackPanel>
         </Button>
 
-        <Button x:Name="ImportButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Import" Margin="10,0">
+        <Button x:Name="ImportButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Import" Margin="10,0" Click="ImportButton_OnClick">
             <StackPanel>
                 <Image Source="..\Resources\import.png" Width="32" Height="32"/>
                 <TextBlock Text="Importuj" HorizontalAlignment="Center" Margin="0,5,0,0"/>
             </StackPanel>
         </Button>
 
-        <Button x:Name="ExportButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Export" Margin="10,0">
+        <Button x:Name="ExportButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Export" Margin="10,0" Click="ExportButton_OnClick">
             <StackPanel>
                 <Image Source="..\Resources\export.png" Width="32" Height="32"/>
                 <TextBlock Text="Exportuj" HorizontalAlignment="Center" Margin="0,5,0,0"/>
             </StackPanel>
         </Button>
 
-        <Button x:Name="RaportsButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Statystyki" Margin="10,0">
+        <Button x:Name="StatisticsButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Statystyki" Margin="10,0" Click="StatisticsButton_OnClick">
             <StackPanel>
                 <Image Source="..\Resources\raports.png" Width="32" Height="32"/>
                 <TextBlock Text="Statystyki" HorizontalAlignment="Center" Margin="0,5,0,0"/>
             </StackPanel>
         </Button>
 
-        <Button x:Name="SettingsButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Ustawienia" Margin="10,0">
+        <Button x:Name="SettingsButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Ustawienia" Margin="10,0" Click="SettingsButton_OnClick">
             <StackPanel>
                 <Image Source="..\Resources\settings.png" Width="32" Height="32"/>
                 <TextBlock Text="Ustawienia" HorizontalAlignment="Center" Margin="0,5,0,0"/>

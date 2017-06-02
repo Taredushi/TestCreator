@@ -19,6 +19,13 @@ namespace TestCreator.Database
             db.SaveChanges();
         }
 
+        public static void SaveTestToDb(Test test)
+        {
+            var db = new MyDbContext();
+            db.Tests.AddOrUpdate(test);
+            db.SaveChanges();
+        }
+
         public static void RemoveTestByID(int id)
         {
             var db = new MyDbContext();
@@ -66,6 +73,18 @@ namespace TestCreator.Database
         {
             var db = new MyDbContext();
             return db.Answers.Single(x => x.AnswerID == id);
+        }
+
+        public static List<User> GetAllUsers()
+        {
+            var db = new MyDbContext();
+            return db.Users.ToList();
+        }
+
+        public static User GetUserByID(int id)
+        {
+            var db = new MyDbContext();
+            return db.Users.Single(x => x.UserID == id);
         }
     }
 }

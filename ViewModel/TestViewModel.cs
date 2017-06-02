@@ -63,6 +63,22 @@ namespace TestCreator.ViewModel
             return test;
         }
 
+        public Test GetTest(Test oldTest)
+        {
+            Test test = new Test();
+            test.Name = this.Name;
+            test.QuestionsLimit = int.Parse(QuestionsLimit);
+            test.Questions = GetQuestions();
+
+            if (ID != 0)
+            {
+                test.TestID = ID;
+                test.Tests = oldTest.Tests;
+            }
+
+            return test;
+        }
+
         public List<Database.Question> GetQuestions()
         {
             List<Database.Question> questions = new List<Database.Question>();
