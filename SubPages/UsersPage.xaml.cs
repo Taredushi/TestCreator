@@ -65,9 +65,9 @@ namespace TestCreator.SubPages
 
         private void InitializeSortCombobox()
         {
-            SortCombobox.AddComboboxItem("Nazwa");
-            SortCombobox.AddComboboxItem("Ilość pytań");
-            SortCombobox.AddComboboxItem("Wszystkich pytań");
+            SortCombobox.AddComboboxItem("Imię");
+            SortCombobox.AddComboboxItem("Nazwisko");
+            SortCombobox.AddComboboxItem("Rola");
             SortCombobox.PropertyChanged += SortComboboxOnPropertyChanged;
         }
 
