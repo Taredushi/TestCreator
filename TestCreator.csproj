@@ -263,5 +263,10 @@
   <ItemGroup>
     <Resource Include="Resources\logout.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add_user.png" />
+    <Resource Include="Resources\delete_user.png" />
+    <Resource Include="Resources\edit_user.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

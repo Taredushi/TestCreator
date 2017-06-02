@@ -83,7 +83,7 @@
                             <Button x:Name="AddTestButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                                     Margin="10,0" ToolTip="Dodaj nowego użytkownika" Click="AddUserButton_OnClick">
                                 <StackPanel>
-                                    <Image Source="..\Resources\add.png" Width="32" Height="32"/>
+                                    <Image Source="..\Resources\add_user.png" Width="32" Height="32"/>
                                     <TextBlock Text="Dodaj" HorizontalAlignment="Center" Margin="0,5,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -99,7 +99,7 @@
                                     </Style>
                                 </Button.Style>
                                 <StackPanel>
-                                    <Image Source="..\Resources\edit.png" Width="32" Height="32"/>
+                                    <Image Source="..\Resources\edit_user.png" Width="32" Height="32"/>
                                     <TextBlock Text="Edytuj" HorizontalAlignment="Center"  Margin="0,5,0,0"/>
                                 </StackPanel>
                             </Button>
@@ -115,7 +115,7 @@
                                     </Style>
                                 </Button.Style>
                                 <StackPanel>
-                                    <Image Source="..\Resources\delete.png" Width="32" Height="32"/>
+                                    <Image Source="..\Resources\delete_user.png" Width="32" Height="32"/>
                                     <TextBlock Text="Usuń" HorizontalAlignment="Center"  Margin="0,5,0,0"/>
                                 </StackPanel>
                             </Button>
