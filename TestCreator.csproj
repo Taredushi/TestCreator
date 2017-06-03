@@ -104,6 +104,7 @@
     <Compile Include="Enumerators\Role.cs" />
     <Compile Include="Enumerators\ToolbarOption.cs" />
     <Compile Include="Events\ToolBarEventArgs.cs" />
+    <Compile Include="Helpers\EnumMaxValue.cs" />
     <Compile Include="Migrations\201705101740279_init.cs" />
     <Compile Include="Migrations\201705101740279_init.Designer.cs">
       <DependentUpon>201705101740279_init.cs</DependentUpon>
@@ -125,6 +126,9 @@
     </Compile>
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\TestHelpers.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
@@ -173,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -248,10 +256,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converter\" />
-    <Folder Include="DB\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\add.png" />
     <Resource Include="Resources\delete.png" />

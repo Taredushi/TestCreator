@@ -264,15 +264,17 @@ namespace TestCreator.SubPages
         }
         #endregion
 
-        #region TestButtons
+        #region UserButtons
         private void AddUserButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //var testdlg = new TestWindow(true);
+            var  userdlg = new UserWindow();
+            userdlg.WindowName = "Dodaj użytkownika";
 
-            //if (testdlg.ShowDialog() == true)
-            //{
-            //    LoadUsersList();
-            //}
+            if (userdlg.ShowDialog() == true)
+            {
+                userdlg.SaveToDatabase();
+                LoadUsersList();
+            }
         }
 
         private void DeleteUserButton_OnClick(object sender, RoutedEventArgs e)
@@ -283,18 +285,16 @@ namespace TestCreator.SubPages
         private void EditUserButton_OnClick(object sender, RoutedEventArgs e)
         {
 
-            var user = DatabaseHelpers.GetTestByID((UsersListView.SelectedItem as UserViewModel).ID);
+            var user = DatabaseHelpers.GetUserByID((UsersListView.SelectedItem as UserViewModel).ID);
 
-            //var model = new TestViewModel(false);
-            //model.Title = "Edytuj test";
-            //model.CreateModel(test);
+            var userdlg = new UserWindow(user);
+            userdlg.WindowName = "Edycja użytkownika";
 
-            //var testdlg = new TestWindow(model);
-
-            //if (testdlg.ShowDialog() == true)
-            //{
-            //    LoadUsersList();
-            //}
+            if (userdlg.ShowDialog() == true)
+            {
+                userdlg.SaveToDatabase();
+                LoadUsersList();
+            }
 
         }
         #endregion

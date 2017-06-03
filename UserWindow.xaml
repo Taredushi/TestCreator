@@ -1,0 +1,93 @@
+﻿<Window x:Class="TestCreator.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestCreator"
+        mc:Ignorable="d"
+        ResizeMode="CanResize"
+        Title="{Binding Title}">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFBFEBF1" Offset="0"/>
+            <GradientStop Color="#FFB1BFC1" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Grid Visibility="Visible">
+        <Border CornerRadius="5" Margin="20" BorderThickness="1" Background="#FF302929">
+            <Grid Background="#FF302929" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="TitleTextBlock" Padding="15,20,15,5" Grid.Row="0" Text="{Binding WindowName}" FontSize="30" FontFamily="Cooper Black" Foreground="WhiteSmoke"/>
+
+                <Border Grid.Row="2" Background="#FF338D8D" BorderThickness="2" CornerRadius="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Border Background="#FF235B89" Margin="5" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <GroupBox Grid.Column="0" Margin="10" Header="Dane Konta" Foreground="WhiteSmoke">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5,0">Login:</TextBlock>
+                                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                                                 Text="{Binding User.Login, Mode=TwoWay}"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5,0">Imię:</TextBlock>
+                                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                                                 Text="{Binding User.Name, Mode=TwoWay}"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5,0">Nazwisko:</TextBlock>
+                                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                                                 Text="{Binding User.Surname, Mode=TwoWay}"/>
+                                        <TextBlock x:Name="PasswordTextBlock" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5,0" >Nowe hasło:</TextBlock>
+                                        <PasswordBox x:Name="Passwordbox" Grid.Row="3" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5,0">Email:</TextBlock>
+                                        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                                                 Text="{Binding User.Email, Mode=TwoWay}"/>
+                                        <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5,0">Rola:</TextBlock>
+                                        <ComboBox x:Name="RoleCombobox" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5" SelectionChanged="RoleCombobox_OnSelectionChanged"/>
+                                    </Grid>
+                                </GroupBox>
+                            </Grid>
+                        </Border>
+
+                        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                            <Button x:Name="OkButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                                    Margin="10,5" ToolTip="Zatwierdź zmiany i wyjdź" Click="OkButton_OnClick">
+                                <TextBlock Text="Zatwierdź" HorizontalAlignment="Center" />
+                            </Button>
+                            <Button x:Name="CancelButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  
+                                    Margin="10,5" ToolTip="Anuluj zmiany i zamknij okno" Click="CancelButton_OnClick">
+                                <TextBlock Text="Zakończ" HorizontalAlignment="Center"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

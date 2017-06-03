@@ -127,6 +127,10 @@ namespace TestCreator
 
         private void OkButton_OnClick(object sender, RoutedEventArgs e)
         {
+            int temp;
+            if (string.IsNullOrEmpty(_testViewModel.QuestionsLimit) ||
+                !int.TryParse(_testViewModel.QuestionsLimit, out temp)) return;
+
             this.DialogResult = true;
             if (_testViewModel.ID != 0)
             {

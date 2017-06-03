@@ -86,5 +86,12 @@ namespace TestCreator.Database
             var db = new MyDbContext();
             return db.Users.Single(x => x.UserID == id);
         }
+
+        public static void SaveUser(User user)
+        {
+            var db = new MyDbContext();
+            db.Users.AddOrUpdate(user);
+            db.SaveChanges();
+        }
     }
 }
