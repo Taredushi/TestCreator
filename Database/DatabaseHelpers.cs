@@ -5,6 +5,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestCreator.Enumerators;
 using TestCreator.ViewModel;
 
 namespace TestCreator.Database
@@ -92,6 +93,24 @@ namespace TestCreator.Database
             var db = new MyDbContext();
             db.Users.AddOrUpdate(user);
             db.SaveChanges();
+        }
+
+        public static int GetAllUsersCount()
+        {
+            var db = new MyDbContext();
+            return db.Users.Count();
+        }
+
+        public static int GetUsersCount()
+        {
+            var db = new MyDbContext();
+            return db.Users.Count(x=>x.Role == (int)Role.User);
+        }
+
+        public static int GetAdminsCount()
+        {
+            var db = new MyDbContext();
+            return db.Users.Count(x => x.Role == (int)Role.Admin);
         }
     }
 }

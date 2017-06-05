@@ -29,6 +29,7 @@ namespace TestCreator.Database
             get { return BitmapConverter.ConvertBytesToBitmap(Avatar); }
         }
 
+
         public virtual ICollection<UserTest> Tests { get; set; }
 
     }

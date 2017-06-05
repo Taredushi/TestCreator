@@ -30,29 +30,24 @@ namespace TestCreator.SubPages
 
         public ObservableCollection<UserViewModel> UserCollection { get; set; }
 
-        public UsersPage()
-        {
-            InitializeComponent();
-            UserCollection = new ObservableCollection<UserViewModel>();
-            LoadUsersList();
-            UsersListView.ItemsSource = UserCollection;
-            InitializeSortCombobox();
-            DataContext = this;
-            TopPanel.Logout += Logout;
-            Title = "Użytkownicy";
-        }
-
         public UsersPage(User user)
         {
             InitializeComponent();
             LoggedUser = user;
+            InitializePage();
+        }
+
+        private void InitializePage()
+        {
             UserCollection = new ObservableCollection<UserViewModel>();
             LoadUsersList();
             UsersListView.ItemsSource = UserCollection;
             InitializeSortCombobox();
+            InitializeGroupCombobox();
             DataContext = this;
             TopPanel.Logout += Logout;
             Title = "Użytkownicy";
+            SetupUsersNumbers();
         }
 
         private ListCollectionView View
@@ -71,6 +66,26 @@ namespace TestCreator.SubPages
             SortCombobox.PropertyChanged += SortComboboxOnPropertyChanged;
         }
 
+        private void InitializeGroupCombobox()
+        {
+            GroupCombobox.AddComboboxItem("Brak");
+            GroupCombobox.AddComboboxItem("Rola");
+            GroupCombobox.PropertyChanged += GroupComboboxOnPropertyChanged;
+        }
+
+        private void GroupComboboxOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (GroupCombobox.SelectedItem.Equals("Brak"))
+            {
+                View.GroupDescriptions.Clear();
+            }
+            else if (GroupCombobox.SelectedItem.Equals("Rola"))
+            {
+                View.GroupDescriptions.Clear();
+                View.GroupDescriptions.Add(new PropertyGroupDescription("RoleName"));
+            }
+        }
+
         private void LoadUsersList()
         {
             UserCollection.Clear();
@@ -83,6 +98,12 @@ namespace TestCreator.SubPages
             }
         }
 
+        private void SetupUsersNumbers()
+        {
+            AllUsers = DatabaseHelpers.GetAllUsersCount();
+            Admins = DatabaseHelpers.GetAdminsCount();
+            Users = DatabaseHelpers.GetUsersCount();
+        }
 
         #region Dependency Properties
 
@@ -126,7 +147,7 @@ namespace TestCreator.SubPages
         }
 
         public static readonly DependencyProperty UserAvatarPropert = DependencyProperty.Register(
-            "UserAvatar", typeof(BitmapImage), typeof(UsersPage), new PropertyMetadata(default(string)));
+            "UserAvatar", typeof(BitmapImage), typeof(UsersPage), new PropertyMetadata(default(BitmapImage)));
 
         public BitmapImage UserAvatar
         {
@@ -136,6 +157,44 @@ namespace TestCreator.SubPages
                 SetValue(UserAvatarPropert, value);
             }
         }
+
+        public static readonly DependencyProperty AllUsersPropert = DependencyProperty.Register(
+            "AllUsers", typeof(int), typeof(UsersPage), new PropertyMetadata(default(int)));
+
+        public int AllUsers
+        {
+            get { return (int)GetValue(AllUsersPropert); }
+            set
+            {
+                SetValue(AllUsersPropert, value);
+            }
+        }
+
+        public static readonly DependencyProperty AdminsPropert = DependencyProperty.Register(
+            "Admins", typeof(int), typeof(UsersPage), new PropertyMetadata(default(int)));
+
+        public int Admins
+        {
+            get { return (int)GetValue(AdminsPropert); }
+            set
+            {
+                SetValue(AdminsPropert, value);
+            }
+        }
+
+        public static readonly DependencyProperty UsersPropert = DependencyProperty.Register(
+            "Users", typeof(int), typeof(UsersPage), new PropertyMetadata(default(int)));
+
+        public int Users
+        {
+            get { return (int)GetValue(UsersPropert); }
+            set
+            {
+                SetValue(UsersPropert, value);
+            }
+        }
+
+
 
         #endregion
 
@@ -188,6 +247,11 @@ namespace TestCreator.SubPages
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void Logout(object sender, EventArgs eventArgs)
+        {
+            OnPropertyChanged("Logout");
         }
         #endregion
 
@@ -312,9 +376,6 @@ namespace TestCreator.SubPages
         }
         #endregion
 
-        private void Logout(object sender, EventArgs eventArgs)
-        {
-            OnPropertyChanged("Logout");
-        }
+        
     }
 }

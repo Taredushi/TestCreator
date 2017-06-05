@@ -6,6 +6,13 @@
              xmlns:local="clr-namespace:TestCreator.SubPages"
              xmlns:controls="clr-namespace:TestCreator.Controls"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="GroupTemplate">
+            <TextBlock Text="{Binding Name}"
+                       FontWeight="Bold" Foreground="White" Background="DodgerBlue"
+                       Margin="0,5,0,0" Padding="3"/>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid Visibility="Visible">
         <Border CornerRadius="5" Margin="20" BorderThickness="1" Background="#FF302929">
             <Grid Background="#FF302929" Margin="5">
@@ -45,8 +52,15 @@
                             <TextBlock Text="Sortowanie po: " Margin="5" Foreground="WhiteSmoke" FontSize="12" VerticalAlignment="Center"/>
                             <controls:Combobox x:Name="SortCombobox"/>
                         </StackPanel>
+                        <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" Margin="30,0">
+                            <TextBlock Text="Grupowanie po: " Margin="5" Foreground="WhiteSmoke" FontSize="12" VerticalAlignment="Center"/>
+                            <controls:Combobox x:Name="GroupCombobox"/>
+                        </StackPanel>
                         <Border Grid.Column="0" Grid.Row="1" BorderThickness="2" CornerRadius="10" BorderBrush="#FF266ABB" Background="#FF235B89"  Margin="5,5,5,20">
                             <ListView x:Name="UsersListView" Background="#FF235B89" BorderThickness="0" Margin="3">
+                                <ListBox.GroupStyle>
+                                    <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
+                                </ListBox.GroupStyle>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -121,6 +135,32 @@
                                 </StackPanel>
                             </Button>
                         </StackPanel>
+                        <Grid Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Wszystkich użytkowników:" Foreground="WhiteSmoke" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                       Grid.Column="0" Grid.Row="0"/>
+                            <Border Grid.Column="1" Grid.Row="0" BorderThickness="2" BorderBrush="#FF193B57" Background="#FF193B57" CornerRadius="5" Margin="5">
+                                <TextBlock Text="{Binding AllUsers}" Foreground="WhiteSmoke" FontSize="15" Margin="10,5"/>
+                            </Border>
+                            <TextBlock Text="Administratorów:" Foreground="WhiteSmoke" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                       Grid.Column="0" Grid.Row="1"/>
+                            <Border Grid.Column="1" Grid.Row="1" BorderThickness="2" BorderBrush="#FF193B57" Background="#FF193B57" CornerRadius="5" Margin="5">
+                                <TextBlock Text="{Binding Admins}" Foreground="WhiteSmoke" FontSize="15" Margin="10,5"/>
+                            </Border>
+                            <TextBlock Text="Użytkowniów:" Foreground="WhiteSmoke" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                       Grid.Column="0" Grid.Row="2"/>
+                            <Border Grid.Column="1" Grid.Row="2" BorderThickness="2" BorderBrush="#FF193B57" Background="#FF193B57" CornerRadius="5" Margin="5">
+                                <TextBlock Text="{Binding Users}" Foreground="WhiteSmoke" FontSize="15" Margin="10,5"/>
+                            </Border>
+                        </Grid>
                     </Grid>
                 </Border>
             </Grid>

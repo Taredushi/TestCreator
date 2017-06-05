@@ -15,7 +15,11 @@ namespace TestCreator.ViewModel
         public string Surname { get; set; }
         public string FullName { get { return Name + " " + Surname; } }
         public Role Role { get; set; }
-        public string RoleName { get { return Enum.GetName(typeof(Role), Role); } }
+
+        public string RoleName
+        {
+            get { return Enum.GetName(typeof(Role), Role); }
+        }
 
 
         public void CreateSimpleModel(User user)
