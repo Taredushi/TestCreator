@@ -15,7 +15,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!--- Top panel -->
-                <controls:TopPanel x:Name="TopPanel" Title="Użytkownicy" LoggedUserName="{Binding LoggedUserName}" LoggedUserRole="{Binding LoggedUserRole}" Grid.Row="0"/>
+                <controls:TopPanel x:Name="TopPanel" Title="Użytkownicy" LoggedUserName="{Binding LoggedUserName}" LoggedUserRole="{Binding LoggedUserRole}" 
+                                   UserAvatar="{Binding UserAvatar}" Grid.Row="0"/>
 
                 <Border Grid.Row="1" Background="#FF25677A" BorderThickness="2" CornerRadius="2">
                     <Grid Margin="5">

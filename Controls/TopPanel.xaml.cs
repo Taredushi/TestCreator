@@ -64,6 +64,18 @@ namespace TestCreator.Controls
                 SetValue(UserRolePropert, value);
             }
         }
+
+        public static readonly DependencyProperty UserAvatarPropert = DependencyProperty.Register(
+            "UserAvatar", typeof(BitmapImage), typeof(TopPanel), new PropertyMetadata(default(string)));
+
+        public BitmapImage UserAvatar
+        {
+            get { return (BitmapImage)GetValue(UserAvatarPropert); }
+            set
+            {
+                SetValue(UserAvatarPropert, value);
+            }
+        }
         #endregion
 
         private void LogoutButton_OnClick(object sender, RoutedEventArgs e)

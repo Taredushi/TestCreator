@@ -97,6 +97,7 @@ namespace TestCreator.SubPages
                 SetValue(UserPropert, value);
                 LoggedUserName = LoggedUser.Name + " " + LoggedUser.Surname;
                 LoggedUserRole = Enum.GetName(typeof(Role), (Role) LoggedUser.Role);
+                UserAvatar = LoggedUser.AvatarBitmap;
             }
         }
 
@@ -121,6 +122,18 @@ namespace TestCreator.SubPages
             set
             {
                 SetValue(UserRolePropert, value);
+            }
+        }
+
+        public static readonly DependencyProperty UserAvatarPropert = DependencyProperty.Register(
+            "UserAvatar", typeof(BitmapImage), typeof(TestsPage), new PropertyMetadata(default(string)));
+
+        public BitmapImage UserAvatar
+        {
+            get { return (BitmapImage)GetValue(UserAvatarPropert); }
+            set
+            {
+                SetValue(UserAvatarPropert, value);
             }
         }
 

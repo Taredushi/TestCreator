@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 using TestCreator.Database;
 using TestCreator.Enumerators;
 using TestCreator.Helpers;
@@ -78,6 +79,7 @@ namespace TestCreator
 
         public void SaveToDatabase()
         {
+            User.Avatar = BitmapConverter.ConvertBitmapToBytes(AvatarImage.Source as BitmapImage);
             DatabaseHelpers.SaveUser(User);
         }
 
@@ -92,6 +94,19 @@ namespace TestCreator
         private void RoleCombobox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             User.Role = RoleCombobox.SelectedIndex;
+        }
+
+        private void AvatarButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "Pliki obrazu | *.jpg;*.jpeg;*.png;*.bmp";
+            fileDialog.Multiselect = false;
+            var result = fileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                AvatarImage.Source = new BitmapImage(new Uri(fileDialog.FileName));
+            }
         }
     }
 }

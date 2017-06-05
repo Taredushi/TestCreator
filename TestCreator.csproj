@@ -104,6 +104,7 @@
     <Compile Include="Enumerators\Role.cs" />
     <Compile Include="Enumerators\ToolbarOption.cs" />
     <Compile Include="Events\ToolBarEventArgs.cs" />
+    <Compile Include="Helpers\BitmapConverter.cs" />
     <Compile Include="Helpers\EnumMaxValue.cs" />
     <Compile Include="Migrations\201705101740279_init.cs" />
     <Compile Include="Migrations\201705101740279_init.Designer.cs">
@@ -116,6 +117,10 @@
     <Compile Include="Migrations\201705311809369_QuestionsLimit.cs" />
     <Compile Include="Migrations\201705311809369_QuestionsLimit.Designer.cs">
       <DependentUpon>201705311809369_QuestionsLimit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706051759315_user_avatar.cs" />
+    <Compile Include="Migrations\201706051759315_user_avatar.Designer.cs">
+      <DependentUpon>201706051759315_user_avatar.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SubPages\TestsPage.xaml.cs">
@@ -207,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705311809369_QuestionsLimit.resx">
       <DependentUpon>201705311809369_QuestionsLimit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706051759315_user_avatar.resx">
+      <DependentUpon>201706051759315_user_avatar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -16,7 +16,7 @@
                 </Grid.RowDefinitions>
                 <!--- Top panel -->
                 <controls:TopPanel x:Name="TopPanel" Title="{Binding Title, Mode=OneWay}" LoggedUserName="{Binding LoggedUserName, Mode=OneWay}" 
-                                   LoggedUserRole="{Binding LoggedUserRole, Mode=OneWay}" Grid.Row="0"/>
+                                   LoggedUserRole="{Binding LoggedUserRole, Mode=OneWay}" UserAvatar="{Binding UserAvatar}" Grid.Row="0"/>
                 
                 <Border Grid.Row="1" Background="#FF25677A" BorderThickness="2" CornerRadius="2">
                     <Grid Margin="5">
