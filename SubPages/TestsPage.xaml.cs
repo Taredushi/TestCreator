@@ -299,5 +299,15 @@ namespace TestCreator.SubPages
         {
             OnPropertyChanged("Logout");
         }
+
+        private void SolveTestButton_OnClickTestButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            //var testdlg = new SolveTestWindow(true);
+
+            //if (testdlg.ShowDialog() == true)
+            //{
+            //    LoadSolveTest();
+            //}
+        }
     }
 }

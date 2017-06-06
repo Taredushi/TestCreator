@@ -124,6 +124,37 @@
                                 </StackPanel>
                             </Button>
                         </StackPanel>
+                        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                            <Button x:Name="SolveTestButton" Margin="10,0" ToolTip="Rozwiąż wybrany test" Click="SolveTestButton_OnClickTestButton_OnClick">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" >
+                                        <Setter Property="IsEnabled" Value="True" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedIndex, ElementName=TestsListView}" Value="-1">
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <StackPanel>
+                                    <Image Source="..\Resources\test.png" Width="32" Height="32"/>
+                                    <TextBlock Text="Rozwiąż" HorizontalAlignment="Center"  Margin="0,5,0,0"/>
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Setter Property="IsEnabled" Value="True" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding LoggedUserRole}" Value="User">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding LoggedUserRole}" Value="Admin">
+                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
                     </Grid>
                 </Border>
             </Grid>
