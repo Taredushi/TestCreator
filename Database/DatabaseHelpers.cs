@@ -27,6 +27,13 @@ namespace TestCreator.Database
             db.SaveChanges();
         }
 
+        public static void SaveUserTestToDb(UserTest userTest)
+        {
+            var db = new MyDbContext();
+            db.UserTests.AddOrUpdate(userTest);
+            db.SaveChanges();
+        }
+
         public static void RemoveTestByID(int id)
         {
             var db = new MyDbContext();

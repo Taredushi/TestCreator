@@ -25,9 +25,11 @@ namespace TestCreator
     /// </summary>
     public partial class SolveTestWindow : Window
     {
-        public SolveTestWindow(SolveTestViewModel solveTestViewModel)
+        private int _userId;
+        public SolveTestWindow(SolveTestViewModel solveTestViewModel, int userId)
         {
             InitializeComponent();
+            _userId = userId;
             _solveTestViewModel = solveTestViewModel;
             DataContext = SolveTestViewModel;
         }
@@ -103,21 +105,29 @@ namespace TestCreator
         private void OkButton_OnClick(object sender, RoutedEventArgs e)
         {
             int temp;
-            //if (string.IsNullOrEmpty(_solveTestViewModel.QuestionsLimit) ||
-            //    !int.TryParse(_solveTestViewModel.QuestionsLimit, out temp)) return;
 
-            //this.DialogResult = true;
-            //if (_solveTestViewModel.ID != 0)
-            //{
-            //    var test = DatabaseHelpers.GetTestByID(_solveTestViewModel.ID);
-            //    DatabaseHelpers.RemoveTestByID(_solveTestViewModel.ID);
-            //    DatabaseHelpers.SaveTestToDb(test);
-            //}
-            //else
-            //{
-            //    DatabaseHelpers.SaveTestToDb(_solveTestViewModel);
-            //}
-            
+            if (string.IsNullOrEmpty(_solveTestViewModel.QuestionsLimit) ||
+                !int.TryParse(_solveTestViewModel.QuestionsLimit, out temp)) return;
+
+            this.DialogResult = true;
+            if (_solveTestViewModel.ID != 0)
+            {
+                var userTest = new UserTest
+                {
+                    TestID = _solveTestViewModel.ID,
+                    UserID = _userId,
+                    Result = _solveTestViewModel.CalculateScore()
+                };
+                DatabaseHelpers.SaveUserTestToDb(userTest);
+                //var test = DatabaseHelpers.GetTestByID(_solveTestViewModel.ID);
+                //DatabaseHelpers.RemoveTestByID(_solveTestViewModel.ID);
+                //DatabaseHelpers.SaveTestToDb(test);
+            }
+            else
+            {
+                //DatabaseHelpers.SaveTestToDb(_solveTestViewModel);
+            }
+
             this.Close();
         }
 
