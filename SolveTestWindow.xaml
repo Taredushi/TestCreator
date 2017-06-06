@@ -85,16 +85,7 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Border Grid.Row="0" Background="Blue">
-                                <Grid Background="#FF334B69">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="Treść pytania: " Padding="10"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding CurrentQuestion.Title}" Padding="10" TextWrapping="WrapWithOverflow"/>
-                                </Grid>
-                            </Border>
+                            <TextBlock Grid.Row="0" Text="{Binding CurrentQuestion.Title}"/>
                             <DataGrid Grid.Row="1" Margin="5" ItemsSource="{Binding CurrentQuestion.Answers, Mode=TwoWay}" AutoGenerateColumns="True"
                                       AutoGeneratingColumn="AnswersDataGrid_OnAutoGeneratingColumn" CanUserReorderColumns="False" GridLinesVisibility="Horizontal" 
                                       HeadersVisibility="Column" CanUserSortColumns="False" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" 
@@ -128,11 +119,11 @@
                         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                             <Button x:Name="OkButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                                     Margin="10,5" ToolTip="Zatwierdź zmiany i wyjdź" Click="OkButton_OnClick">
-                                <TextBlock Text="Zatwierdź i Zakończ" HorizontalAlignment="Center" />
+                                <TextBlock Text="Zatwierdź" HorizontalAlignment="Center" />
                             </Button>
                             <Button x:Name="CancelButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  
                                     Margin="10,5" ToolTip="Anuluj zmiany i zamknij okno" Click="CancelButton_OnClick">
-                                <TextBlock Text="Anuluj" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Zakończ" HorizontalAlignment="Center"/>
                             </Button>
                         </StackPanel>
                     </Grid>

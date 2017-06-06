@@ -6,7 +6,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using TestCreator.Annotations;
 using TestCreator.Database;
 
@@ -51,7 +50,6 @@ namespace TestCreator.ViewModel
 
             foreach (var question in test.Questions)
             {
-                //for anwsers
                 var newQuestion = new Question
                 {
                     Number = QuestionsWithAnswersFromUser.Count + 1,
@@ -70,27 +68,16 @@ namespace TestCreator.ViewModel
                     });
                 }
                 ChoosenQuestionsWithAnswers.Add(newQuestion);
-                // for users
-                var newQuestionForUser = new Question
-                {
-                    Number = QuestionsWithAnswersFromUser.Count + 1,
-                    Title = question.Text,
-                    ID = question.QuestionID,
-                    Answers = new ObservableCollection<Answer>()
-                };
 
-                foreach (var answer in question.Answers)
+                foreach (var answer in newQuestion.Answers)
                 {
-                    newQuestionForUser.Answers.Add(new Answer()
-                    {
-                        Text = answer.Text,
-                        IsCorrect = false,
-                        ID = answer.AnswerID
-                    });
+                    answer.IsCorrect = false;
                 }
-                QuestionsWithAnswersFromUser.Add(newQuestionForUser);
+                QuestionsWithAnswersFromUser.Add(newQuestion);
 
             }
+            CurrentQuestion = QuestionsWithAnswersFromUser[0];
+            WhichQuestion = CurrentQuestion.Number.ToString() + " z " + QuestionsLimit;
 
             var rand = new Random();
             var results = Enumerable.Range(1, test.Questions.Count).OrderBy(x => rand.Next()).Take(test.QuestionsLimit).ToList();
@@ -98,8 +85,6 @@ namespace TestCreator.ViewModel
             QuestionsWithAnswersFromUser = new ObservableCollection<Question>(QuestionsWithAnswersFromUser.Where(x => results.Contains(x.Number)));
             ChoosenQuestionsWithAnswers = ChoosenQuestionsWithAnswers.Where(x => results.Contains(x.Number)).ToList();
 
-            CurrentQuestion = QuestionsWithAnswersFromUser[0];
-            WhichQuestion = CurrentQuestion.Number.ToString() + " z " + QuestionsLimit;
         }
 
 
@@ -197,40 +182,6 @@ namespace TestCreator.ViewModel
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public int CalculateScore()
-        {
-            var score = 0;
-            var maxScore = 0;
-            for (var i = 0; i < ChoosenQuestionsWithAnswers.Count; i++)
-            {
-                var question = ChoosenQuestionsWithAnswers[i];
-                var usersAnswers = QuestionsWithAnswersFromUser[i];
-
-                var pointsFromQuestion = 0;
-
-                for (var index = 0; index < question.Answers.Count; index++)
-                {
-                    var answer = question.Answers[index];
-                    var usersAnwser = usersAnswers.Answers[index];
-
-                    if (answer.IsCorrect == usersAnwser.IsCorrect)
-                    {
-                        if(answer.IsCorrect)
-                            pointsFromQuestion++;
-                    }
-                    else
-                    {
-                        pointsFromQuestion = 0;
-                        break;
-                    }
-                }
-                maxScore += question.Answers.Where(x => x.IsCorrect).ToList().Count;
-                score += pointsFromQuestion;
-            }
-            MessageBox.Show("Your Score: " + score + " / " + maxScore, "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            return score;
         }
     }
 }
