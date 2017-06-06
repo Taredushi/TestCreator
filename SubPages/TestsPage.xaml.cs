@@ -137,18 +137,6 @@ namespace TestCreator.SubPages
             }
         }
 
-        public static readonly DependencyProperty SelectedTestIDPropert = DependencyProperty.Register(
-            "SelectedTestID", typeof(int), typeof(TestsPage), new PropertyMetadata(default(int)));
-
-        public int SelectedTestID
-        {
-            get { return (int)GetValue(SelectedTestIDPropert); }
-            set
-            {
-                SetValue(SelectedTestIDPropert, value);
-            }
-        }
-
         #endregion
 
         #region Events
@@ -312,9 +300,18 @@ namespace TestCreator.SubPages
             OnPropertyChanged("Logout");
         }
 
-        private void TestsListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SolveTestButton_OnClickTestButton_OnClick(object sender, RoutedEventArgs e)
         {
-            SelectedTestID = TestCollection[TestsListView.SelectedIndex].ID;
+            var test = DatabaseHelpers.GetTestByID((TestsListView.SelectedItem as TestViewModel).ID);
+            var model = new SolveTestViewModel {Title = "Rozwiąż Test"};
+            model.CreateModel(test);
+
+            var solveTestdlg = new SolveTestWindow(model,LoggedUser.UserID);
+
+            if (solveTestdlg.ShowDialog() == true)
+            {
+                //LoadTestList();
+            }
         }
 
         private void SolveTestButton_OnClickTestButton_OnClick(object sender, RoutedEventArgs e)
