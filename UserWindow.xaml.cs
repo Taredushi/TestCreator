@@ -32,8 +32,11 @@ namespace TestCreator
         public UserWindow()
         {
             InitializeComponent();
+            User = new User()
+            {
+                Role = (int)Role.User
+            };
             SetupRoleComboboxSource();
-            User = new User();
             DataContext = this;
             PasswordTextBlock.Text = "Hasło";
         }
@@ -115,33 +118,25 @@ namespace TestCreator
         }
 
       
-        /// <summary>
         /// Returns true if form is valid, else returns false.
-        /// </summary>
-        /// <returns></returns>
         private bool Validate_User()
         {
-            MessageBox.Show(RoleCombobox.SelectedIndex.ToString());
-            if (!ValidatorExtensions.IsValidEmailAddress(EmailTb.Text))
+            if (!EmailTb.Text.IsValidEmailAddress())
             {
-                MessageBox.Show("Your email address is invalid!", "Email error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Nieprawidłowy adres e-mail!", "Email error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            if(String.IsNullOrEmpty(LoginTb.Text))
+            if(string.IsNullOrEmpty(LoginTb.Text))
             {
-                MessageBox.Show("Your login is invalid!", "Login error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Nieprawidłowy Login!", "Login error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             if(AvatarImage.Source == null)
             {
-                if(MessageBox.Show("Your avatar is empty! Do yo want to continue anyway?", "Avatar error", 
+                if(MessageBox.Show("Avatar jest pusty! Chcesz kontynuować mimo to?", "Avatar error", 
                     MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.Yes)
                 {
-                    BitmapImage _avatar = new BitmapImage();
-                    _avatar.BeginInit(); 
-                    _avatar.UriSource = new Uri("pack://application:,,,/Resources/add_user.png");//placeholder
-                    _avatar.EndInit();
-                    AvatarImage.Source = _avatar;
+                    AvatarImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/add_user.png"));
                 }
                 else
                 {

@@ -316,5 +316,10 @@ namespace TestCreator.SubPages
         {
             SelectedTestID = TestCollection[TestsListView.SelectedIndex].ID;
         }
+
+        private void SolveTestButton_OnClickTestButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
