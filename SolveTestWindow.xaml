@@ -1,0 +1,134 @@
+﻿<Window x:Class="TestCreator.SolveTestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestCreator"
+        xmlns:vm="clr-namespace:TestCreator.ViewModel"
+        mc:Ignorable="d"
+        ResizeMode="CanResize"
+        Title="{Binding Title}">
+
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFBFEBF1" Offset="0"/>
+            <GradientStop Color="#FFB1BFC1" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    
+    <Window.Resources>
+        <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Border" SnapsToDevicePixels="true">
+                            <GridViewRowPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsCorrect}" Value="false">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ColorProperty}" Value="true">
+                                            <Setter Property="Background" Value="LimeGreen"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Visibility="Visible">
+        <Border CornerRadius="5" Margin="20" BorderThickness="1" Background="#FF302929">
+            <Grid Background="#FF302929" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="TitleTextBlock" Padding="15,20,15,5" Grid.Row="0" Text="{Binding Title}" FontSize="30" FontFamily="Cooper Black" Foreground="WhiteSmoke"/>
+                <Border Grid.Row="1" Background="#FF25677A" BorderThickness="2" CornerRadius="2">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Nazwa: " Grid.Column="0" Foreground="WhiteSmoke" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="NameTb" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="NoWrap" Background="Transparent" Foreground="WhiteSmoke" Text="{Binding Name}"/>
+                        <StackPanel Grid.Column="4" Orientation="Horizontal" Margin="5,0">
+                            <TextBlock Text="Pytanie: " VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="5,0"/>
+                            <TextBlock x:Name="WhichQuestion" VerticalAlignment="Center" Foreground="WhiteSmoke" Text="{Binding WhichQuestion}" Margin="5,0"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2" Background="#FF338D8D" BorderThickness="2" CornerRadius="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!--Lista pytań-->
+                        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Background="#FF235B89">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding CurrentQuestion.Title}"/>
+                            <DataGrid Grid.Row="1" Margin="5" ItemsSource="{Binding CurrentQuestion.Answers, Mode=TwoWay}" AutoGenerateColumns="True"
+                                      AutoGeneratingColumn="AnswersDataGrid_OnAutoGeneratingColumn" CanUserReorderColumns="False" GridLinesVisibility="Horizontal" 
+                                      HeadersVisibility="Column" CanUserSortColumns="False" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" 
+                                      RowDetailsVisibilityMode="Visible" Background="#FF235B89" SelectionChanged="Selector_OnSelectionChanged">
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsCorrect}" Value="false">
+                                                <Setter Property="Background" Value="Transparent"></Setter>
+                                                <Setter Property="Foreground" Value="WhiteSmoke"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsCorrect}" Value="true">
+                                                <Setter Property="Background" Value="LimeGreen"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.RowStyle>
+                            </DataGrid>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center"> 
+                                <Button x:Name="PreviousQuestionButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                                        Margin="10,5" ToolTip="Przejdź do poprzedniego pytania." Click="GoBackThePreviousQuestion_OnClick">
+                                    <TextBlock Text="Poprzednie pytanie" HorizontalAlignment="Center" />
+                                </Button>
+                                <Button x:Name="NextQuestionButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                                        Margin="10,5" ToolTip="Przejdź do następnego pytania." Click="GoToTheNextQuestion_OnClick">
+                                    <TextBlock Text="Następne pytanie" HorizontalAlignment="Center" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                        
+                        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                            <Button x:Name="OkButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                                    Margin="10,5" ToolTip="Zatwierdź zmiany i wyjdź" Click="OkButton_OnClick">
+                                <TextBlock Text="Zatwierdź" HorizontalAlignment="Center" />
+                            </Button>
+                            <Button x:Name="CancelButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  
+                                    Margin="10,5" ToolTip="Anuluj zmiany i zamknij okno" Click="CancelButton_OnClick">
+                                <TextBlock Text="Zakończ" HorizontalAlignment="Center"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

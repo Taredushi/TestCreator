@@ -123,11 +123,15 @@
       <DependentUpon>201706051759315_user_avatar.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SubPages\TestsPage.xaml.cs">
       <DependentUpon>TestsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SubPages\UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SolveTestWindow.xaml.cs">
+      <DependentUpon>SolveTestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
@@ -136,6 +140,7 @@
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\TestHelpers.cs" />
+    <Compile Include="ViewModel\SolveTestViewModel.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Page Include="Controls\Combobox.xaml">
@@ -180,6 +185,10 @@
     <Page Include="SubPages\UsersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SolveTestWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="TestWindow.xaml">
       <SubType>Designer</SubType>
