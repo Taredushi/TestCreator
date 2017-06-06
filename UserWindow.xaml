@@ -56,7 +56,7 @@
                                         </Grid.RowDefinitions>
                                         <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5,0">Login:</TextBlock>
                                         <TextBox Grid.Row="0" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                                                 Text="{Binding User.Login, Mode=TwoWay}"/>
+                                                 Text="{Binding User.Login, Mode=TwoWay}" x:Name="LoginTb"  />
                                         <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5,0">Imię:</TextBlock>
                                         <TextBox Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"
                                                  Text="{Binding User.Name, Mode=TwoWay}"/>
@@ -64,10 +64,11 @@
                                         <TextBox Grid.Row="2" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"
                                                  Text="{Binding User.Surname, Mode=TwoWay}"/>
                                         <TextBlock x:Name="PasswordTextBlock" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5,0" >Nowe hasło:</TextBlock>
-                                        <PasswordBox x:Name="Passwordbox" Grid.Row="3" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                                        <PasswordBox x:Name="Passwordbox" Grid.Row="3" Grid.Column="1" Margin="5" VerticalContentAlignment="Center"
+                                                     VerticalAlignment="Center" />
                                         <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5,0">Email:</TextBlock>
                                         <TextBox Grid.Row="4" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" VerticalAlignment="Center"
-                                                 Text="{Binding User.Email, Mode=TwoWay}"/>
+                                                 Text="{Binding User.Email, Mode=TwoWay,ValidatesOnDataErrors=True}" x:Name="EmailTb" />
                                         <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5,0">Rola:</TextBlock>
                                         <ComboBox x:Name="RoleCombobox" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5" SelectionChanged="RoleCombobox_OnSelectionChanged"/>
                                     </Grid>
