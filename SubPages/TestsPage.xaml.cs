@@ -137,6 +137,18 @@ namespace TestCreator.SubPages
             }
         }
 
+        public static readonly DependencyProperty SelectedTestIDPropert = DependencyProperty.Register(
+            "SelectedTestID", typeof(int), typeof(TestsPage), new PropertyMetadata(default(int)));
+
+        public int SelectedTestID
+        {
+            get { return (int)GetValue(SelectedTestIDPropert); }
+            set
+            {
+                SetValue(SelectedTestIDPropert, value);
+            }
+        }
+
         #endregion
 
         #region Events
@@ -298,6 +310,11 @@ namespace TestCreator.SubPages
         private void Logout(object sender, EventArgs eventArgs)
         {
             OnPropertyChanged("Logout");
+        }
+
+        private void TestsListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedTestID = TestCollection[TestsListView.SelectedIndex].ID;
         }
 
         private void SolveTestButton_OnClickTestButton_OnClick(object sender, RoutedEventArgs e)
