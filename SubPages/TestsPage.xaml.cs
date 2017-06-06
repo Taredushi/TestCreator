@@ -306,7 +306,7 @@ namespace TestCreator.SubPages
             var model = new SolveTestViewModel {Title = "Rozwiąż Test"};
             model.CreateModel(test);
 
-            var solveTestdlg = new SolveTestWindow(model);
+            var solveTestdlg = new SolveTestWindow(model,LoggedUser.UserID);
 
             if (solveTestdlg.ShowDialog() == true)
             {
