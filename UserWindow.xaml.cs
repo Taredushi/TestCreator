@@ -48,9 +48,14 @@ namespace TestCreator
 
         private void OkButton_OnClick(object sender, RoutedEventArgs e)
         {
-            CheckNewPassword();
-            this.DialogResult = true;
-            this.Close();
+            //validation
+            if (Validate_User())
+            {
+                CheckNewPassword();
+                this.DialogResult = true;
+                this.Close();
+            }
+           
         }
 
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
@@ -107,6 +112,43 @@ namespace TestCreator
             {
                 AvatarImage.Source = new BitmapImage(new Uri(fileDialog.FileName));
             }
+        }
+
+      
+        /// <summary>
+        /// Returns true if form is valid, else returns false.
+        /// </summary>
+        /// <returns></returns>
+        private bool Validate_User()
+        {
+            MessageBox.Show(RoleCombobox.SelectedIndex.ToString());
+            if (!ValidatorExtensions.IsValidEmailAddress(EmailTb.Text))
+            {
+                MessageBox.Show("Your email address is invalid!", "Email error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if(String.IsNullOrEmpty(LoginTb.Text))
+            {
+                MessageBox.Show("Your login is invalid!", "Login error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if(AvatarImage.Source == null)
+            {
+                if(MessageBox.Show("Your avatar is empty! Do yo want to continue anyway?", "Avatar error", 
+                    MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.Yes)
+                {
+                    BitmapImage _avatar = new BitmapImage();
+                    _avatar.BeginInit(); 
+                    _avatar.UriSource = new Uri("pack://application:,,,/Resources/add_user.png");//placeholder
+                    _avatar.EndInit();
+                    AvatarImage.Source = _avatar;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

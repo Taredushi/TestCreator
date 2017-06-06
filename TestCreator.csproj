@@ -105,6 +105,7 @@
     <Compile Include="Enumerators\ToolbarOption.cs" />
     <Compile Include="Events\ToolBarEventArgs.cs" />
     <Compile Include="Helpers\BitmapConverter.cs" />
+    <Compile Include="Helpers\ValidatorExtensions.cs" />
     <Compile Include="Helpers\EnumMaxValue.cs" />
     <Compile Include="Migrations\201705101740279_init.cs" />
     <Compile Include="Migrations\201705101740279_init.Designer.cs">
