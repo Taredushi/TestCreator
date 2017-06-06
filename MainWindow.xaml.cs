@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using TestCreator.Database;
 using TestCreator.Enumerators;
 using TestCreator.Events;
+using TestCreator.Export;
 using TestCreator.SubPages;
 
 namespace TestCreator
@@ -53,6 +54,11 @@ namespace TestCreator
                 case ToolbarOption.Import:
                     break;
                 case ToolbarOption.Export:
+                    if (ContentCtrl.Content is TestsPage)
+                    {
+                        var saveDoc = new SaveDoc();
+                        saveDoc.SaveTest(DatabaseHelpers.GetTestByID((ContentCtrl.Content as TestsPage).SelectedTestID), "test");
+                    }
                     break;
                 case ToolbarOption.Statistics:
                     break;
