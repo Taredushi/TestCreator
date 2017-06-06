@@ -46,7 +46,7 @@
                             <controls:Combobox x:Name="SortCombobox"/>
                         </StackPanel>
                         <Border Grid.Column="0" Grid.Row="1" BorderThickness="2" CornerRadius="10" BorderBrush="#FF266ABB" Background="#FF235B89"  Margin="5,5,5,20">
-                            <ListView x:Name="TestsListView" Background="#FF235B89" BorderThickness="0" Margin="3">
+                            <ListView x:Name="TestsListView" Background="#FF235B89" BorderThickness="0" Margin="3" SelectionChanged="TestsListView_OnSelectionChanged">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
