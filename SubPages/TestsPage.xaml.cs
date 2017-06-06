@@ -314,9 +314,6 @@ namespace TestCreator.SubPages
             }
         }
 
-        private void SolveTestButton_OnClickTestButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            
-        }
+
     }
 }
