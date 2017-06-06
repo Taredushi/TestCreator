@@ -319,7 +319,18 @@ namespace TestCreator.SubPages
 
         private void SolveTestButton_OnClickTestButton_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            var test = DatabaseHelpers.GetTestByID((TestsListView.SelectedItem as TestViewModel).ID);
+            var model = new SolveTestViewModel {Title = "Rozwiąż Test"};
+            model.CreateModel(test);
+
+            var solveTestdlg = new SolveTestWindow(model,LoggedUser.UserID);
+
+            if (solveTestdlg.ShowDialog() == true)
+            {
+                //LoadTestList();
+            }
         }
+
+
     }
 }
