@@ -41,8 +41,8 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Column="0" Grid.Row="0">
-                            <Border BorderThickness="2" CornerRadius="10" BorderBrush="#FF266ABB" Background="#FF235B89"  Margin="5,5,5,20">
+                        <Grid Grid.Column="0" Grid.Row="0">
+                            <Border Grid.Row="0" BorderThickness="2" CornerRadius="10" BorderBrush="#FF266ABB" Background="#FF235B89"  Margin="5,5,5,20">
                                 <Border.Style>
                                     <Style TargetType="Border">
                                         <Setter Property="IsEnabled" Value="True" />
@@ -53,7 +53,7 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Border.Style>
-                                <DVC:Chart Name="PieChart" Title="{Binding TitleOfChart}">
+                                <DVC:Chart Name="PieChart" Title="{Binding TitleOfChart}" MinHeight="250">
                                     <DVC:Chart.Series>
                                         <DVC:PieSeries ItemsSource="{Binding LoadPieChartData}" 
                                                        IndependentValueBinding="{Binding Path=Key}" 
@@ -61,7 +61,26 @@
                                     </DVC:Chart.Series>
                                 </DVC:Chart>
                             </Border>
-                        </StackPanel>
+                            <Border Grid.Row="0" BorderThickness="2" CornerRadius="10" BorderBrush="#FF266ABB" Background="#FF235B89"  Margin="5,5,5,20">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="IsEnabled" Value="True" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding LoggedUserRole}" Value="User">
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <DVC:Chart Name="ChartForAdmin" Title="{Binding TitleOfAdminsChart}" MinHeight="250">
+                                    <DVC:Chart.Series>
+                                        <DVC:ColumnSeries ItemsSource="{Binding LoadColumnChartData}" 
+                                                       IndependentValueBinding="{Binding Path=Key}" 
+                                                       DependentValueBinding="{Binding Path=Value}"/>
+                                    </DVC:Chart.Series>
+                                </DVC:Chart>
+                            </Border>
+                        </Grid>
 
                         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
                             <StackPanel.Style>

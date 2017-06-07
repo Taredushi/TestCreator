@@ -14,7 +14,7 @@ namespace TestCreator.Database
         public DateTime WhenTestWasDone { get; set; }
 
         public int UserID { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         public int TestID { get; set; }
         public Test Test { get; set; }
