@@ -33,7 +33,7 @@
                                 <Button x:Name="XmlExport" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="XmlExport_OnClick">
                                     <Border BorderThickness="3" BorderBrush="#99F5F5F5" CornerRadius="5" Background="#59000000" Width="200">
                                         <StackPanel Orientation="Horizontal">
-                                            <Image Source="..\Resources\xml.png" Width="64" Height="64" Margin="5"/>
+                                            <Image Source="..\TestCreator\Resources\xml.png" Width="64" Height="64" Margin="5"/>
                                             <TextBlock Text="XML" Padding="20,5" Foreground="#CCF5F5F5" VerticalAlignment="Center" FontFamily="Snap ITC" FontSize="30"/>
                                         </StackPanel>
                                     </Border>
@@ -41,7 +41,7 @@
                                 <Button x:Name="DocxExport" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="DocxExport_OnClick">
                                     <Border BorderThickness="3" BorderBrush="#99F5F5F5" CornerRadius="5" Background="#59000000" Width="200">
                                         <StackPanel Orientation="Horizontal">
-                                            <Image Source="..\Resources\docx.png" Width="64" Height="64" Margin="5"/>
+                                            <Image Source="..\TestCreator\Resources\docx.png" Width="64" Height="64" Margin="5"/>
                                             <TextBlock Text="Docx" Padding="20,5" Foreground="#CCF5F5F5" VerticalAlignment="Center" FontFamily="Snap ITC" FontSize="30"/>
                                         </StackPanel>
                                     </Border>
@@ -49,7 +49,7 @@
                                 <Button x:Name="PdfExport" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="PdfExport_OnClick">
                                     <Border BorderThickness="3" BorderBrush="#99F5F5F5" CornerRadius="5" Background="#59000000" Width="200">
                                         <StackPanel Orientation="Horizontal">
-                                            <Image Source="..\Resources\pdf.png" Width="64" Height="64" Margin="5"/>
+                                            <Image Source="..\TestCreator\Resources\pdf.png" Width="64" Height="64" Margin="5"/>
                                             <TextBlock Text="PDF" Padding="20,5" Foreground="#CCF5F5F5" VerticalAlignment="Center" FontFamily="Snap ITC" FontSize="30"/>
                                         </StackPanel>
                                     </Border>

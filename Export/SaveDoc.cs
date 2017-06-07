@@ -100,7 +100,7 @@ namespace TestCreator.Export
             object wordOMissing = Missing.Value;
 
             Application wordApp = new Application { Visible = false };
-            Microsoft.Office.Interop.Word.Document doc = wordApp.Documents.Open(path, ReadOnly: true, Visible: false);
+            var doc = wordApp.Documents.Open(path, ReadOnly: true, Visible: false);
             string pdfPath = path.Remove(path.LastIndexOf('.')) + ".pdf";
             object target = pdfPath.Replace("_tmp", "");
             object format = WdSaveFormat.wdFormatPDF;
