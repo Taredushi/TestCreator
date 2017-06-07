@@ -26,6 +26,7 @@ namespace TestCreator
         #region Private Fields
         private string _errorString = "Podany Login lub/oraz Hasło są niepoprawne.";
         private string _loginString = "login";
+        private string _passwordString = "password";
         #endregion
 
         #region Constructor
@@ -36,6 +37,7 @@ namespace TestCreator
             LoginForeColor = Brushes.LightGray;
             PasswordForeColor = Brushes.LightGray;
             DataContext = this;
+            PasswordTb.Password = _passwordString;
         }
 
         #endregion
@@ -116,6 +118,15 @@ namespace TestCreator
             LoginTb.Text = _loginString;
         }
 
+        private void PasswordTb_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTb.Password.Equals(_passwordString))
+            {
+                PasswordTb.Password = "";
+                PasswordTb.Foreground = Brushes.Black;
+            }
+        }
+
         private void LoginPage_OnKeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -150,6 +161,7 @@ namespace TestCreator
         }
 
         #endregion
+
 
         
     }

@@ -36,7 +36,7 @@ namespace TestCreator
             DataContext = this;
             this._test = test;
             _appPath = AppDomain.CurrentDomain.BaseDirectory;
-            _exportPath = _appPath + "\\Export\\";
+            _exportPath = _appPath + "Export\\";
 
         }
 

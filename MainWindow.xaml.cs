@@ -65,8 +65,6 @@ namespace TestCreator
                 case ToolbarOption.Statistics:
                     CreateStatisticsPage();
                     break;
-                case ToolbarOption.Settings:
-                    break;
             }
         }
 

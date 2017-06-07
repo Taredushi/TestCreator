@@ -155,6 +155,26 @@
                                 </StackPanel>
                             </Button>
                         </StackPanel>
+                        <StackPanel Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button x:Name="PrintButton" Click="PrintButton_OnClick">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" >
+                                        <Setter Property="IsEnabled" Value="True" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedIndex, ElementName=TestsListView}" Value="-1">
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Border BorderThickness="3" BorderBrush="#99F5F5F5" CornerRadius="5" Background="#590E0E27" Width="250">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="..\Resources\printer.png" Width="64" Height="64" Margin="10,5"/>
+                                        <TextBlock Text="Drukuj" Padding="15,5" Foreground="#CCF5F5F5" VerticalAlignment="Center" FontFamily="Snap ITC" FontSize="30"/>
+                                    </StackPanel>
+                                </Border>
+                            </Button>
+                        </StackPanel>
                     </Grid>
                 </Border>
             </Grid>

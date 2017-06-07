@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -17,6 +18,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TestCreator.Database;
 using TestCreator.Enumerators;
+using TestCreator.Export;
+using TestCreator.Helpers;
 using TestCreator.ViewModel;
 
 namespace TestCreator.SubPages
@@ -333,5 +336,15 @@ namespace TestCreator.SubPages
         }
 
 
+        private void PrintButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var savedoc = new SaveDoc();
+            var file = AppDomain.CurrentDomain.BaseDirectory + "print_tmp";
+            var test = DatabaseHelpers.GetTestByID((TestsListView.SelectedItem as TestViewModel).ID);
+            savedoc.SaveTestToWord(test, file);
+            PrintWord.Print(file + ".docx");
+            File.Delete(file + ".docx");
+            MessageBox.Show("Plik został dodany do kolejki drukowania.", "", MessageBoxButton.OK, MessageBoxImage.None);
+        }
     }
 }

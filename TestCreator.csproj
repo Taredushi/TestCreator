@@ -125,6 +125,7 @@
     <Compile Include="Export\SaveDoc.cs" />
     <Compile Include="Export\TestXml.cs" />
     <Compile Include="Helpers\BitmapConverter.cs" />
+    <Compile Include="Helpers\PrintWord.cs" />
     <Compile Include="Helpers\ValidatorExtensions.cs" />
     <Compile Include="Helpers\EnumMaxValue.cs" />
     <Compile Include="Helpers\XmlGenerator.cs" />
@@ -364,6 +365,9 @@
   <ItemGroup>
     <Resource Include="Resources\docx.png" />
     <Resource Include="Resources\pdf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\printer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

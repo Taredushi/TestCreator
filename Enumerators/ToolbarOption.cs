@@ -12,7 +12,6 @@ namespace TestCreator.Enumerators
         User,
         Import,
         Export,
-        Statistics,
-        Settings
+        Statistics
     }
 }

@@ -41,13 +41,5 @@
                 <TextBlock Text="Statystyki" HorizontalAlignment="Center" Margin="0,5,0,0"/>
             </StackPanel>
         </Button>
-
-        <Button x:Name="SettingsButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Ustawienia" Margin="10,0" Click="SettingsButton_OnClick">
-            <StackPanel>
-                <Image Source="..\Resources\settings.png" Width="32" Height="32"/>
-                <TextBlock Text="Ustawienia" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-            </StackPanel>
-        </Button>
-
     </StackPanel>
 </UserControl>

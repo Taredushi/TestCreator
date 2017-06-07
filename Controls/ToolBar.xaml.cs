@@ -34,7 +34,6 @@ namespace TestCreator.Controls
             ImportButton.Visibility = Visibility.Visible;
             ExportButton.Visibility = Visibility.Visible;
             StatisticsButton.Visibility = Visibility.Visible;
-            SettingsButton.Visibility = Visibility.Visible;
 
         }
 
@@ -45,7 +44,6 @@ namespace TestCreator.Controls
             ExportButton.Visibility = Visibility.Collapsed;
             TestsButton.Visibility = Visibility.Visible;
             StatisticsButton.Visibility = Visibility.Visible;
-            SettingsButton.Visibility = Visibility.Visible;
         }
 
         public event EventHandler ButtonClicked;
@@ -75,9 +73,5 @@ namespace TestCreator.Controls
             ButtonClicked?.Invoke(this, new ToolBarEventArgs() { Option = ToolbarOption.Statistics });
         }
 
-        private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            ButtonClicked?.Invoke(this, new ToolBarEventArgs() { Option = ToolbarOption.Settings });
-        }
     }
 }

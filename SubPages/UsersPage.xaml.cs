@@ -155,6 +155,7 @@ namespace TestCreator.SubPages
             set
             {
                 SetValue(UserAvatarPropert, value);
+                OnPropertyChanged();
             }
         }
 
@@ -370,6 +371,7 @@ namespace TestCreator.SubPages
             if (userdlg.ShowDialog() == true)
             {
                 userdlg.SaveToDatabase();
+                LoggedUser = DatabaseHelpers.GetUserByID(LoggedUser.UserID);
                 LoadUsersList();
             }
 
