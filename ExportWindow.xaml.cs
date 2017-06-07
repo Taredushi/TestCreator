@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -54,6 +55,8 @@ namespace TestCreator
 
         private void DocxExport_OnClick(object sender, RoutedEventArgs e)
         {
+            if (!CheckWordProcesses()) return;
+
             CreateFolderIfNotExists(_exportPath);
             string path = GetFilePath();
             var saveDoc = new SaveDoc();
@@ -64,12 +67,25 @@ namespace TestCreator
 
         private void PdfExport_OnClick(object sender, RoutedEventArgs e)
         {
-            CreateFolderIfNotExists(_exportPath);
-            string path = GetFilePath();
-            var saveDoc = new SaveDoc();
-            saveDoc.SaveTestToPdf(_test, path);
+            if (!CheckWordProcesses()) return;
+            try
+            {
+                CreateFolderIfNotExists(_exportPath);
+                string path = GetFilePath();
+                var saveDoc = new SaveDoc();
+                saveDoc.SaveTestToPdf(_test, path);
 
-            MessageBox.Show("Exportowanie zakończone sukcesem.", "", MessageBoxButton.OK, MessageBoxImage.None);
+                MessageBox.Show("Exportowanie zakończone sukcesem.", "", MessageBoxButton.OK, MessageBoxImage.None);
+            }
+            catch
+            {
+                foreach (var arg in Process.GetProcessesByName("WINWORD"))
+                {
+                    arg.Kill();
+                }
+                File.Delete(_exportPath + "_tmp.docx");
+                MessageBox.Show("Wystąpił błąd przy exporcie.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void CreateFolderIfNotExists(string path)
@@ -88,5 +104,17 @@ namespace TestCreator
             }
             return _exportPath + _test.Name;
         }
+
+        private bool CheckWordProcesses()
+        {
+            if (Process.GetProcessesByName("WINWORD").Length > 0)
+            {
+                MessageBox.Show(this, "Zamknij wszystkie okna programu Microsoft Word.", @"", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+        }
+
     }
 }

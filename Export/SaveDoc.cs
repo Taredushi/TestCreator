@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -72,7 +73,9 @@ namespace TestCreator.Export
         public void SaveTestToPdf(Test test, string path)
         {
             string newPath = path + "_tmp";
+            KillWordProcesses();
             SaveTestToWord(test, newPath);
+            KillWordProcesses();
             SaveDocxAsPdf(newPath + ".docx");
             File.Delete(newPath + ".docx");
         }
@@ -89,7 +92,7 @@ namespace TestCreator.Export
                 "", 2, false, false, false, false);
 
             doc.Close(WdSaveOptions.wdSaveChanges, wordOMissing, wordOMissing);
-            wordApp.Quit(wordOMissing, wordOMissing, wordOMissing);
+            wordApp.Quit(ref wordOMissing, ref wordOMissing, ref wordOMissing);
         }
 
         private void SaveDocxAsPdf(string path)
@@ -99,8 +102,10 @@ namespace TestCreator.Export
             Application wordApp = new Application { Visible = false };
             Microsoft.Office.Interop.Word.Document doc = wordApp.Documents.Open(path, ReadOnly: true, Visible: false);
             string pdfPath = path.Remove(path.LastIndexOf('.')) + ".pdf";
+            object target = pdfPath.Replace("_tmp", "");
+            object format = WdSaveFormat.wdFormatPDF;
 
-            doc.SaveAs(pdfPath, WdSaveFormat.wdFormatPDF, ref wordOMissing, ref wordOMissing, ref wordOMissing, 
+            doc.SaveAs2(ref target, ref format, ref wordOMissing, ref wordOMissing, ref wordOMissing, 
                 ref wordOMissing, ref wordOMissing, ref wordOMissing, ref wordOMissing, ref wordOMissing,
                 ref wordOMissing, ref wordOMissing, ref wordOMissing, ref wordOMissing, ref wordOMissing, 
                 ref wordOMissing);
@@ -128,6 +133,14 @@ namespace TestCreator.Export
                 list.Add(collection[number]);
             }
             return list;
+        }
+
+        private void KillWordProcesses()
+        {
+            foreach (var arg in Process.GetProcessesByName("WINWORD"))
+            {
+                arg.Kill();
+            }
         }
     }
 }
