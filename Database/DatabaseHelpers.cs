@@ -34,6 +34,12 @@ namespace TestCreator.Database
             db.SaveChanges();
         }
 
+        public static List<UserTest> GetTestsOfUser(User user)
+        {
+            var db = new MyDbContext();
+            return db.UserTests.Where(x=>x.UserID == user.UserID).ToList();
+        }
+
         public static void RemoveTestByID(int id)
         {
             var db = new MyDbContext();

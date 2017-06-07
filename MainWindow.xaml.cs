@@ -61,6 +61,7 @@ namespace TestCreator
                     }
                     break;
                 case ToolbarOption.Statistics:
+                    CreateStatisticsPage();
                     break;
                 case ToolbarOption.Settings:
                     break;
@@ -129,6 +130,13 @@ namespace TestCreator
         private void CreateUserPage()
         {
             var page = new UsersPage(_loggedUser);
+            page.PropertyChanged += CurrentPageOnPropertyChanged;
+            ContentCtrl.Content = page;
+            EnableToolbar((Role)_loggedUser.Role);
+        }
+        private void CreateStatisticsPage()
+        {
+            var page = new StatisticsPage(_loggedUser);
             page.PropertyChanged += CurrentPageOnPropertyChanged;
             ContentCtrl.Content = page;
             EnableToolbar((Role)_loggedUser.Role);

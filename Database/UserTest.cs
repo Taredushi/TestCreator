@@ -11,6 +11,7 @@ namespace TestCreator.Database
     {
         public int UserTestID { get; set; }
         public int Result { get; set; }
+        public DateTime WhenTestWasDone { get; set; }
 
         public int UserID { get; set; }
         public User User { get; set; }

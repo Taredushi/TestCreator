@@ -116,7 +116,8 @@ namespace TestCreator
                 {
                     TestID = _solveTestViewModel.ID,
                     UserID = _userId,
-                    Result = _solveTestViewModel.CalculateScore()
+                    Result = _solveTestViewModel.CalculateScore(),
+                    WhenTestWasDone = DateTime.Now
                 };
                 DatabaseHelpers.SaveUserTestToDb(userTest);
                 //var test = DatabaseHelpers.GetTestByID(_solveTestViewModel.ID);
