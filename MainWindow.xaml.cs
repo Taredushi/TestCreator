@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,10 +15,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 using TestCreator.Database;
 using TestCreator.Enumerators;
 using TestCreator.Events;
 using TestCreator.Export;
+using TestCreator.Helpers;
 using TestCreator.SubPages;
 
 namespace TestCreator
@@ -29,6 +32,7 @@ namespace TestCreator
     {
 
         private User _loggedUser;
+        
 
         public MainWindow()
         {
@@ -38,6 +42,7 @@ namespace TestCreator
             var login = new LoginPage();
             login.PropertyChanged += CurrentPageOnPropertyChanged;
             ContentCtrl.Content = login;
+            
         }
 
         private void BottomToolbarOnButtonClicked(object sender, EventArgs e)
@@ -52,13 +57,10 @@ namespace TestCreator
                     CreateUserPage();
                     break;
                 case ToolbarOption.Import:
+                    Import();
                     break;
                 case ToolbarOption.Export:
-                    if (ContentCtrl.Content is TestsPage)
-                    {
-                        var saveDoc = new SaveDoc();
-                        saveDoc.SaveTest(DatabaseHelpers.GetTestByID((ContentCtrl.Content as TestsPage).SelectedTestID), "test");
-                    }
+                    Export();
                     break;
                 case ToolbarOption.Statistics:
                     break;
@@ -118,6 +120,34 @@ namespace TestCreator
             }
         }
 
+        private void Export()
+        {
+            var page = ContentCtrl.Content as TestsPage;
+            if (page == null) return;
+            if (page.SelectedTestID == 0) return;
+
+            var exportdlg = new ExportWindow(DatabaseHelpers.GetTestByID(page.SelectedTestID));
+            exportdlg.ShowDialog();
+        }
+
+        private void Import()
+        {
+            var fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "Xml | *.xml";
+            fileDialog.Multiselect = false;
+            var result = fileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                var test = XmlGenerator.ImportXml(fileDialog.FileName);
+                DatabaseHelpers.SaveTestToDb(test);
+
+                var page = ContentCtrl.Content as TestsPage;
+                if (page == null) return;
+                page.LoadTestList();
+            }
+        }
+
         #region Creating pages
         private void CreateTestPage()
         {
@@ -134,6 +164,7 @@ namespace TestCreator
             EnableToolbar((Role)_loggedUser.Role);
         }
         #endregion
+
         #region Events
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -142,5 +173,6 @@ namespace TestCreator
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+
     }
 }
