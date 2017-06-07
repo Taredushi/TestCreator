@@ -29,7 +29,10 @@ namespace TestCreator.SubPages
         public string Title { get; set; }
 
         public string TitleOfChart { get; set; }
+        public string TitleOfAdminsChart { get; set; }
+        private List<KeyValuePair<string, int>> ScoresOfAllUsers { get; set; }
         private List<KeyValuePair<string, int>> Scores { get; set; }
+        public IEnumerable<KeyValuePair<string, int>> LoadColumnChartData => ScoresOfAllUsers;
         public IEnumerable<KeyValuePair<string, int>> LoadPieChartData => Scores;
 
         public StatisticsPage(User user)
@@ -43,7 +46,43 @@ namespace TestCreator.SubPages
         {
             DataContext = this;
 
+            InitializeChartOfUser();
+
+            InitializeChartOfAdmin();
+
+            TopPanel.Logout += Logout;
+            Title = "Statystyki";
+        }
+
+        private void InitializeChartOfAdmin()
+        {
+            TitleOfAdminsChart = "Dane Użytkowników procentowo";
+
+            var allUsers = DatabaseHelpers.GetAllUsers().Where(x=>x.Role == (int)Role.User).ToList();
+            ScoresOfAllUsers = new List<KeyValuePair<string, int>>();
+            foreach (var user in allUsers)
+            {
+                var testsOfUser = DatabaseHelpers.GetTestsOfUser(user);
+                int correctAnswers = 0;
+                int maxScores = 0;
+                foreach (var testResult in testsOfUser)
+                {
+                    var test = DatabaseHelpers.GetTestByID(testResult.TestID);
+                    var maxScoreForTest = test.Questions.Take(test.QuestionsLimit).Sum(question => question.Answers.Count(answer => answer.IsCorrect));
+                    maxScores += maxScoreForTest;
+                    correctAnswers += testResult.Result;
+                }
+                
+                var columnValue = (maxScores != 0) ? (correctAnswers * 100 / maxScores) : 0;
+                ScoresOfAllUsers.Add(new KeyValuePair<string, int>
+                    (user.Name, columnValue));
+            }
+        }
+
+        private void InitializeChartOfUser()
+        {
             TitleOfChart = "Dane użytkownika " + LoggedUser.Name + " ze wszystkich testów.";
+
             var testsOfUser = DatabaseHelpers.GetTestsOfUser(LoggedUser);
             Scores = new List<KeyValuePair<string, int>>();
             int correctAnswers = 0;
@@ -59,8 +98,6 @@ namespace TestCreator.SubPages
                 ("Poprawne odpowiedzi", correctAnswers));
             Scores.Add(new KeyValuePair<string, int>
                 ("Nie poprawne odpowiedzi", incorrectAnswers));
-            TopPanel.Logout += Logout;
-            Title = "Statystyki";
         }
 
         #region Dependency Properties

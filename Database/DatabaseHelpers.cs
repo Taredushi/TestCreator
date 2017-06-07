@@ -37,7 +37,13 @@ namespace TestCreator.Database
         public static List<UserTest> GetTestsOfUser(User user)
         {
             var db = new MyDbContext();
-            return db.UserTests.Where(x=>x.UserID == user.UserID).ToList();
+            return db.UserTests.Include(x=>x.User).Where(x=>x.UserID == user.UserID).ToList();
+        }
+
+        public static List<UserTest> GetAllUserTests()
+        {
+            var db = new MyDbContext();
+            return db.UserTests.ToList();
         }
 
         public static void RemoveTestByID(int id)
