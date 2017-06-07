@@ -26,7 +26,6 @@ namespace TestCreator
         #region Private Fields
         private string _errorString = "Podany Login lub/oraz Hasło są niepoprawne.";
         private string _loginString = "login";
-        private string _passwordString = "hasło";
         #endregion
 
         #region Constructor
@@ -34,7 +33,6 @@ namespace TestCreator
         {
             InitializeComponent();
             LoginTb.Text = _loginString;
-            PasswordTb.Text = _passwordString;
             LoginForeColor = Brushes.LightGray;
             PasswordForeColor = Brushes.LightGray;
             DataContext = this;
@@ -83,9 +81,9 @@ namespace TestCreator
         {
             MyDbContext db = new MyDbContext();
 
-            if (!string.IsNullOrEmpty(LoginTb.Text) && !string.IsNullOrEmpty(PasswordTb.Text))
+            if (!string.IsNullOrEmpty(LoginTb.Text) && !string.IsNullOrEmpty(PasswordTb.Password))
             {
-                var pass = Encryptor.MD5Hash(PasswordTb.Text);
+                var pass = Encryptor.MD5Hash(PasswordTb.Password);
 
                 try
                 {
@@ -110,27 +108,12 @@ namespace TestCreator
             LoginTb.CaretIndex = LoginTb.Text.Length;
         }
 
-        private void PasswordTb_OnGotFocus(object sender, RoutedEventArgs e)
-        {
-            PasswordForeColor = Brushes.Black;
-            PasswordTb.Text = PasswordTb.Text.ToLower().Equals(_passwordString) ? "" : PasswordTb.Text;
-            PasswordTb.CaretIndex = PasswordTb.Text.Length;
-        }
-
         private void LoginTb_OnLostFocus(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(LoginTb.Text)) return;
 
             LoginForeColor = Brushes.LightGray;
             LoginTb.Text = _loginString;
-        }
-
-        private void PasswordTb_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(PasswordTb.Text)) return;
-
-            PasswordForeColor = Brushes.LightGray;
-            PasswordTb.Text = _passwordString;
         }
 
         private void LoginPage_OnKeyUp(object sender, KeyEventArgs e)

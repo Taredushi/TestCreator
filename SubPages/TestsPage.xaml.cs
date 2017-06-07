@@ -71,7 +71,7 @@ namespace TestCreator.SubPages
             SortCombobox.PropertyChanged += SortComboboxOnPropertyChanged;
         }
 
-        private void LoadTestList()
+        public void LoadTestList()
         {
             TestCollection.Clear();
             var list = DatabaseHelpers.GetAllTest();
@@ -314,6 +314,7 @@ namespace TestCreator.SubPages
 
         private void TestsListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (TestsListView.SelectedIndex == -1) return;
             SelectedTestID = TestCollection[TestsListView.SelectedIndex].ID;
         }
 

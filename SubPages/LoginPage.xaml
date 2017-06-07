@@ -34,8 +34,8 @@
                         <TextBlock x:Name="ErrorTb" Grid.Row="1" Grid.Column="1" Margin="20,10,20,10" FontSize="20" Foreground="DarkRed" Visibility="Hidden" TextWrapping="WrapWithOverflow"/>
                         <TextBox x:Name="LoginTb" Grid.Row="2" Grid.Column="1" Margin="20,10,20,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
                                  FontSize="20" Foreground="{Binding LoginForeColor}" GotFocus="LoginTb_OnGotFocus" LostFocus="LoginTb_OnLostFocus"/>
-                        <TextBox x:Name="PasswordTb" Grid.Row="3" Grid.Column="1" Margin="20,10,20,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
-                                 FontSize="20" Foreground="{Binding PasswordForeColor}" GotFocus="PasswordTb_OnGotFocus" LostFocus="PasswordTb_OnLostFocus"/>
+                        <PasswordBox x:Name="PasswordTb" Grid.Row="3" Grid.Column="1" Margin="20,10,20,10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 
+                                 FontSize="20" Foreground="{Binding PasswordForeColor}" />
                         <Button x:Name="RememberButton" Grid.Column="1" Grid.Row="4" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                                 HorizontalAlignment="Right" Margin="20,10,20,10" >
                             <TextBlock TextDecorations="Underline" Text="przypomnij szczegóły" FontFamily="Poor Richard" Foreground="LightSlateGray" FontSize="16"/>
