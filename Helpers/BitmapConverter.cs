@@ -27,7 +27,7 @@ namespace TestCreator.Helpers
 
         public static BitmapImage ConvertBytesToBitmap(byte[] imageData)
         {
-            if (imageData == null) return null;
+            if (imageData == null || (imageData?[0].Equals(0)??false)) return null;
 
             using (var ms = new System.IO.MemoryStream(imageData))
             {

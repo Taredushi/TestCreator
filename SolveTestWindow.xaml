@@ -113,14 +113,24 @@
                                     </Style>
                                 </DataGrid.RowStyle>
                             </DataGrid>
-                            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center"> 
+                            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                                 <Button x:Name="PreviousQuestionButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                                        Margin="10,5" ToolTip="Przejdź do poprzedniego pytania." Click="GoBackThePreviousQuestion_OnClick">
-                                    <TextBlock Text="Poprzednie pytanie" HorizontalAlignment="Center" />
+                                        ToolTip="Przejdź do poprzedniego pytania." Click="GoBackThePreviousQuestion_OnClick">
+                                    <Border BorderThickness="3" BorderBrush="#99F5F5F5" CornerRadius="5" Background="#59000000">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Poprzednie pytanie" Padding="20,5" Foreground="#CCF5F5F5" VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center" FontFamily="Segoe UI Semibold" FontSize="15"/>
+                                        </StackPanel>
+                                    </Border>
                                 </Button>
                                 <Button x:Name="NextQuestionButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                                        Margin="10,5" ToolTip="Przejdź do następnego pytania." Click="GoToTheNextQuestion_OnClick">
-                                    <TextBlock Text="Następne pytanie" HorizontalAlignment="Center" />
+                                        ToolTip="Przejdź do następnego pytania." Click="GoToTheNextQuestion_OnClick">
+                                    <Border BorderThickness="3" BorderBrush="#99F5F5F5" CornerRadius="5" Background="#59000000">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Następne pytanie" Padding="20,5" Foreground="#CCF5F5F5" VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center" FontFamily="Segoe UI Semibold" FontSize="15"/>
+                                        </StackPanel>
+                                    </Border>
                                 </Button>
                             </StackPanel>
                         </Grid>
@@ -128,11 +138,21 @@
                         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                             <Button x:Name="OkButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                                     Margin="10,5" ToolTip="Zatwierdź zmiany i wyjdź" Click="OkButton_OnClick">
-                                <TextBlock Text="Zatwierdź i Zakończ" HorizontalAlignment="Center" />
+                                <Border BorderThickness="3" BorderBrush="#99F5F5F5" CornerRadius="5" Background="#59000000">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Zatwierdź i Zakończ" Padding="20,5" Foreground="#CCF5F5F5" VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center" FontFamily="Segoe UI Semibold" FontSize="15"/>
+                                    </StackPanel>
+                                </Border>
                             </Button>
-                            <Button x:Name="CancelButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  
+                            <Button x:Name="CancelButton" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                                     Margin="10,5" ToolTip="Anuluj zmiany i zamknij okno" Click="CancelButton_OnClick">
-                                <TextBlock Text="Anuluj" HorizontalAlignment="Center"/>
+                                <Border BorderThickness="3" BorderBrush="#99F5F5F5" CornerRadius="5" Background="#59000000">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Anuluj" Padding="20,5" Foreground="#CCF5F5F5" VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center" FontFamily="Segoe UI Semibold" FontSize="15"/>
+                                    </StackPanel>
+                                </Border>
                             </Button>
                         </StackPanel>
                     </Grid>

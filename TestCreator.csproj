@@ -64,6 +64,9 @@
     <Reference Include="Spire.Pdf, Version=3.9.113.4040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
       <HintPath>packages\Spire.Doc.5.9.16\lib\net40\Spire.Pdf.dll</HintPath>
     </Reference>
+    <Reference Include="Parser, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5b7d744a7263923f, processorArchitecture=MSIL">
+      <HintPath>packages\DynamicDataDisplayWpf.0.4.0\lib\Parser.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -71,6 +74,9 @@
     <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\System.Windows.Controls.DataVisualization.Toolkit.4.0.0.0\lib\net40-Client\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -138,10 +144,17 @@
     <Compile Include="Migrations\201706051759315_user_avatar.Designer.cs">
       <DependentUpon>201706051759315_user_avatar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706070620160_UpdateOfUserTest-WhenTestWasDonePropAdded.cs" />
+    <Compile Include="Migrations\201706070620160_UpdateOfUserTest-WhenTestWasDonePropAdded.Designer.cs">
+      <DependentUpon>201706070620160_UpdateOfUserTest-WhenTestWasDonePropAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SubPages\TestsPage.xaml.cs">
       <DependentUpon>TestsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubPages\StatisticsPage.xaml.cs">
+      <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SubPages\UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
@@ -202,6 +215,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SubPages\StatisticsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SubPages\UsersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,6 +261,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706051759315_user_avatar.resx">
       <DependentUpon>201706051759315_user_avatar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706070620160_UpdateOfUserTest-WhenTestWasDonePropAdded.resx">
+      <DependentUpon>201706070620160_UpdateOfUserTest-WhenTestWasDonePropAdded.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

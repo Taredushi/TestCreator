@@ -229,7 +229,7 @@ namespace TestCreator.ViewModel
                 maxScore += question.Answers.Where(x => x.IsCorrect).ToList().Count;
                 score += pointsFromQuestion;
             }
-            MessageBox.Show("Your Score: " + score + " / " + maxScore, "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBox.Show("Your Score: " + score + " / " + maxScore, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             return score;
         }
     }
